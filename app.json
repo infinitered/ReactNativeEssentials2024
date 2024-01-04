@@ -1,4 +1,7 @@
 {
   "name": "ReactNativeEssentials",
-  "displayName": "ReactNativeEssentials"
+  "displayName": "ReactNativeEssentials",
+  "plugins": [
+    "expo-font"
+  ]
 }
