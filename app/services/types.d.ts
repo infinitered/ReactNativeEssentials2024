@@ -19,7 +19,7 @@ export type Reviews = Record<Game['id'], Array<string>>;
 
 export type AppendReview = (gameId: Game['id'], review: string) => void;
 
-export interface GameContextData {
+export interface GlobalStateContextData {
   games: Array<Game>;
   setGames: SetGames;
   favorites: Favorites;

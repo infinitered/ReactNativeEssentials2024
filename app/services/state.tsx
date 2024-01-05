@@ -11,10 +11,10 @@ import {
   type ToggleFavorite,
   type Reviews,
   type AppendReview,
-  type GameContextData,
+  type GlobalStateContextData,
 } from './types';
 
-export const GameContext = createContext<GameContextData>({
+export const GlobalStateContext = createContext<GlobalStateContextData>({
   games: [],
   setGames: (_games: Array<Game>) => undefined,
   favorites: [],
@@ -23,7 +23,7 @@ export const GameContext = createContext<GameContextData>({
   appendReview: (_gameId: Game['id'], _review: string) => undefined,
 });
 
-export const GameProvider = ({children}: PropsWithChildren) => {
+export const GlobalStateProvider = ({children}: PropsWithChildren) => {
   const [games, setGames] = useState<Array<Game>>([]);
   const [favorites, setFavorites] = useState<Favorites>([]);
   const [reviews, setReviews] = useState<Reviews>({});
@@ -50,7 +50,7 @@ export const GameProvider = ({children}: PropsWithChildren) => {
   );
 
   return (
-    <GameContext.Provider
+    <GlobalStateContext.Provider
       value={{
         games,
         setGames,
@@ -60,8 +60,8 @@ export const GameProvider = ({children}: PropsWithChildren) => {
         appendReview,
       }}>
       {children}
-    </GameContext.Provider>
+    </GlobalStateContext.Provider>
   );
 };
 
-export const useGame = () => useContext(GameContext);
+export const useGlobalState = () => useContext(GlobalStateContext);
