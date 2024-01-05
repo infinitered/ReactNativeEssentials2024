@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -e
+
+# Remove the build directory for iOS, containing compiled output.
+rm -rf ios/build || true
+
+# Remove the iOS dependencies installed via CocoaPods.
+rm -rf ios/Pods || true
+
+# Clean all cached data from CocoaPods for the iOS project.
+(cd ios && bundle exec pod cache clean --all) || true
+
+# Remove the user's global CocoaPods cache.
+rm -rf ~/.cocoapods || true
+
+# Remove the build directory for Android, containing compiled output.
+rm -rf android/build || true
+
+# Run the Gradle clean task in the Android directory to clean the project.
+(cd android && ./gradlew clean) || true
+
+# Remove the specific build directory for the Android app.
+rm -rf ./android/app/build || true
+
+# Remove the node_modules directory, deleting all installed Node.js dependencies.
+rm -rf node_modules || true
+
+# Clean the Yarn cache, removing cached Node.js packages.
+yarn cache clean || true
+
+# Remove temporary React Native cache files.
+rm -rf $TMPDIR/react-* || true
+
+# Remove temporary Metro bundler cache files.
+rm -rf $TMPDIR/metro-* || true
+
+# Delete all Watchman watches.
+watchman watch-del-all || true
