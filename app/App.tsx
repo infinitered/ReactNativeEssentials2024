@@ -1,6 +1,6 @@
 import React from 'react';
 import {AppNavigator} from './navigators/AppNavigator';
-import {GameProvider} from './services/state';
+import {GlobalStateProvider} from './services/state';
 
 if (__DEV__) {
   import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
@@ -8,9 +8,9 @@ if (__DEV__) {
 
 const App = (): React.JSX.Element => {
   return (
-    <GameProvider>
+    <GlobalStateProvider>
       <AppNavigator />
-    </GameProvider>
+    </GlobalStateProvider>
   );
 };
 
