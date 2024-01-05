@@ -9,11 +9,11 @@ import {
   type ViewStyle,
   View,
 } from 'react-native';
-import {useGame} from '../../services/state';
+import {useGlobalState} from '../../services/state';
 
 const useFindGame = (gameId: string) => {
   const [isLoading, setIsLoading] = React.useState(true);
-  const {reviews} = useGame();
+  const {reviews} = useGlobalState();
   const game = {
     id: 1,
     name: 'Super Mario Bros. Wonder',
