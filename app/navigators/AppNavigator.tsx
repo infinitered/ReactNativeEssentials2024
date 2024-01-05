@@ -17,7 +17,7 @@ import React from 'react';
 import {useColorScheme} from 'react-native';
 import {GamesListScreen} from '../screens/GamesListScreen/GamesListScreen';
 import {GameScreen} from '../screens/GameScreen/GameScreen';
-import {ReviewsScreen} from '../screens/ReviewsScreen/ReviewsScreen';
+import {ReviewScreen} from '../screens/ReviewScreen/ReviewScreen';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -35,7 +35,7 @@ import {ReviewsScreen} from '../screens/ReviewsScreen/ReviewsScreen';
 export type AppStackParamList = {
   GamesList: undefined;
   Game: {gameId: string};
-  Reviews: {gameId: string};
+  Review: {gameId: string};
 };
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> =
@@ -53,7 +53,11 @@ const AppStack = () => {
         options={{title: 'Retro Games'}}
       />
       <Stack.Screen name="Game" component={GameScreen} />
-      <Stack.Screen name="Reviews" component={ReviewsScreen} />
+      <Stack.Screen
+        name="Review"
+        component={ReviewScreen}
+        options={{presentation: 'modal'}}
+      />
     </Stack.Navigator>
   );
 };
