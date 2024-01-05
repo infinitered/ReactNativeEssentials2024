@@ -3,8 +3,9 @@ export interface Game {
   name: string;
   rating: number;
   description: string;
+  imageBackground: string;
   image: string;
-  yearReleased: number;
+  releaseDate: number;
   genre: string;
   studio: string;
 }
