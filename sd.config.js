@@ -1,35 +1,34 @@
-const StyleDictionary = require('style-dictionary');
-const camelCase = require('camelCase');
-const deepmerge = require('deepmerge');
-const figmaVariables = require('./app/theme/tokens/figmaVariables.json');
+const StyleDictionary = require('style-dictionary')
+const camelCase = require('camelCase')
+const deepmerge = require('deepmerge')
+const figmaVariables = require('./app/theme/tokens/figmaVariables.json')
 
 StyleDictionary.registerTransform({
   type: `name`,
   name: `name/ti/camel/strip`,
   transformer: (token, platform) => {
-    const blacklistedPathSegments =
-      (platform.options ?? {}).stripFromPath ?? [];
+    const blacklistedPathSegments = (platform.options ?? {}).stripFromPath ?? []
 
     const whitelistedPathSegments = token.path.filter(
       path => !blacklistedPathSegments.includes(path),
-    );
+    )
 
-    return camelCase(whitelistedPathSegments);
+    return camelCase(whitelistedPathSegments)
   },
-});
+})
 
-const figmaVariablesCollectionNames = Object.keys(figmaVariables);
+const figmaVariablesCollectionNames = Object.keys(figmaVariables)
 
 function addCollectionNameToToken(tokens, collectionName) {
   if (typeof tokens === 'object' && tokens.type) {
     tokens.extensions = {
       ...tokens.extensions,
       ['ReactNativeEssentials']: {collectionName},
-    };
+    }
   } else {
     Object.keys(tokens).forEach(k => {
-      addCollectionNameToToken(tokens[k], collectionName);
-    });
+      addCollectionNameToToken(tokens[k], collectionName)
+    })
   }
 }
 
@@ -38,40 +37,40 @@ const figmaVariablesCollections = Object.entries(figmaVariables).map(
   ([collectionName, collection]) => {
     const collectionNamesWithSuffix = figmaVariablesCollectionNames.map(
       n => `${n}.`,
-    );
+    )
 
-    const regexp = new RegExp(collectionNamesWithSuffix.join('|'), 'g');
+    const regexp = new RegExp(collectionNamesWithSuffix.join('|'), 'g')
 
-    const collectionJson = JSON.stringify(collection).replace(regexp, '');
+    const collectionJson = JSON.stringify(collection).replace(regexp, '')
 
-    const parsedCollection = JSON.parse(collectionJson);
+    const parsedCollection = JSON.parse(collectionJson)
 
-    addCollectionNameToToken(parsedCollection, collectionName);
+    addCollectionNameToToken(parsedCollection, collectionName)
 
-    return parsedCollection;
+    return parsedCollection
   },
-);
+)
 
-const designTokens = deepmerge.all(Object.values(figmaVariablesCollections));
+const designTokens = deepmerge.all(Object.values(figmaVariablesCollections))
 
 function isPrimitiveToken(token) {
   return (
     token.original.extensions.ReactNativeEssentials.collectionName ===
     'primitives'
-  );
+  )
 }
 
 function isSemanticToken(token) {
   return (
     token.original.extensions.ReactNativeEssentials.collectionName ===
     'semantics'
-  );
+  )
 }
 
 function isFunctionalToken(token) {
   return (
     token.original.extensions.ReactNativeEssentials.collectionName === 'tokens'
-  );
+  )
 }
 
 module.exports = {
@@ -145,4 +144,4 @@ module.exports = {
       ],
     },
   },
-};
+}
