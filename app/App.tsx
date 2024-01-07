@@ -1,12 +1,13 @@
 import {useFonts} from 'expo-font'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import BootSplash from 'react-native-bootsplash'
+import {
+  SafeAreaProvider,
+  initialWindowMetrics,
+} from 'react-native-safe-area-context'
 import {AppNavigator} from './navigators/AppNavigator'
 import {GlobalStateProvider} from './services/state'
 import {customFontsToLoad} from './theme'
-import {
-  initialWindowMetrics,
-  SafeAreaProvider,
-} from 'react-native-safe-area-context'
 
 if (__DEV__) {
   import('./ReactotronConfig').then(() => console.log('Reactotron Configured'))
@@ -14,15 +15,22 @@ if (__DEV__) {
 
 const App = (): React.JSX.Element | null => {
   const [areFontsLoaded] = useFonts(customFontsToLoad)
+  const [isNavigationReady, setIsNavigationReady] = useState(false)
 
-  if (!areFontsLoaded) {
-    return null
-  }
+  const isAppReady = areFontsLoaded && isNavigationReady
+
+  useEffect(() => {
+    if (isAppReady) {
+      BootSplash.hide({fade: true})
+    }
+  }, [isAppReady])
+
+  if (!areFontsLoaded) return null
 
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <GlobalStateProvider>
-        <AppNavigator />
+        <AppNavigator onReady={() => setIsNavigationReady(true)} />
       </GlobalStateProvider>
     </SafeAreaProvider>
   )
