@@ -1247,6 +1247,11 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.56.0.tgz#ef20350fec605a7f7035a01764731b2de0f3782b"
   integrity sha512-gMsVel9D7f2HLkBma9VbtzZRehRogVRfbr++f06nL2vnCGCNlzOD+/MUov/F4p8myyAHspEhVobgjpX64q5m6A==
 
+"@expo-google-fonts/oxanium@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/oxanium/-/oxanium-0.2.3.tgz#7cc57abda16bc98c2c616b7c2d3acf1fb80e49de"
+  integrity sha512-PtslbjVCbBFxY5rsf4rcq89QbCI9yl9+GoCwWcZt5j/lu+pNVXMV8RkipqRfrSz0magbl/Hwv3FvG+W8xehEUQ==
+
 "@expo/bunyan@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@expo/bunyan/-/bunyan-4.0.0.tgz#be0c1de943c7987a9fbd309ea0b1acd605890c7b"

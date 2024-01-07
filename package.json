@@ -14,6 +14,7 @@
     "generate:theme": "style-dictionary build --config ./sd.config.js"
   },
   "dependencies": {
+    "@expo-google-fonts/oxanium": "^0.2.3",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
     "expo": ">=50.0.0-0 <51.0.0",
