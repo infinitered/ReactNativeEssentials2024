@@ -48,7 +48,7 @@ const Stack = createNativeStackNavigator<AppStackParamList>();
 
 const AppStack = () => {
   return (
-    <Stack.Navigator initialRouteName="TmpDevScreen">
+    <Stack.Navigator initialRouteName="TmpDevScreen" >
       <Stack.Screen
         name="TmpDevScreen"
         component={TmpDevScreen}
