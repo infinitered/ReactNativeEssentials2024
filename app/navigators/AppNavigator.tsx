@@ -10,14 +10,15 @@ import {
   NavigationContainer,
 } from '@react-navigation/native';
 import {
-  createNativeStackNavigator,
   NativeStackScreenProps,
+  createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import React from 'react';
 import {useColorScheme} from 'react-native';
-import {GamesListScreen} from '../screens/GamesListScreen/GamesListScreen';
 import {GameScreen} from '../screens/GameScreen/GameScreen';
+import {GamesListScreen} from '../screens/GamesListScreen/GamesListScreen';
 import {ReviewScreen} from '../screens/ReviewScreen/ReviewScreen';
+import {TmpDevScreen} from '../screens/TmpDevScreen';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -33,6 +34,7 @@ import {ReviewScreen} from '../screens/ReviewScreen/ReviewScreen';
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
+  TmpDevScreen: undefined;
   GamesList: undefined;
   Game: {gameId: string};
   Review: {gameId: string};
@@ -46,7 +48,12 @@ const Stack = createNativeStackNavigator<AppStackParamList>();
 
 const AppStack = () => {
   return (
-    <Stack.Navigator initialRouteName="GamesList">
+    <Stack.Navigator initialRouteName="TmpDevScreen">
+      <Stack.Screen
+        name="TmpDevScreen"
+        component={TmpDevScreen}
+        options={{title: 'TmpDevScreen'}}
+      />
       <Stack.Screen
         name="GamesList"
         component={GamesListScreen}
