@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Sun, 07 Jan 2024 01:49:44 GMT
+ * Generated on Sun, 07 Jan 2024 04:08:59 GMT
  */
 
 export const red200 = "#e7b1b3ff";
@@ -11,8 +11,8 @@ export const black1000 = "#000000ff";
 export const white1000 = "#ffffffff";
 export const orange100 = "#ffc7b4ff";
 export const orange500 = "#ff5516ff";
-export const transparentWhite0Percent = "#ffffff00";
-export const transparentLemon60060Percent = "#abc70599";
+export const transparentWhite0 = "#ffffff00";
+export const transparentLemon60060 = "#abc70599";
 export const purple800 = "#490448ff";
 export const purpleMuted200 = "#d3c5d3ff";
 export const purpleMuted400 = "#ae84aeff";

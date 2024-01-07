@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Sun, 07 Jan 2024 01:49:44 GMT
+ * Generated on Sun, 07 Jan 2024 04:08:59 GMT
  */
 
 export const lg = 24;
