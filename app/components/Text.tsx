@@ -1,21 +1,21 @@
-import React from 'react';
+import React from 'react'
 import {
   Text as RNText,
   StyleProp,
   TextStyle,
   type TextProps as RNTextProps,
-} from 'react-native';
-import {colors, fonts} from '../theme';
+} from 'react-native'
+import {colors, fonts} from '../theme'
 
 interface TextProps extends RNTextProps {
   /**
    * One of the different types of text presets.
    */
-  preset?: keyof typeof $presets;
+  preset?: keyof typeof $presets
   /**
    * The text to display.
    */
-  text?: string;
+  text?: string
 }
 
 export const Text = (props: TextProps) => {
@@ -25,20 +25,20 @@ export const Text = (props: TextProps) => {
     preset = 'body',
     style: $styleOverride,
     ...RestTextProps
-  } = props;
+  } = props
 
-  const content = text ?? children;
+  const content = text ?? children
 
-  const $textStyle = [$base, $presets[preset], $styleOverride];
+  const $textStyle = [$base, $presets[preset], $styleOverride]
 
   return (
     <RNText {...RestTextProps} style={$textStyle}>
       {content}
     </RNText>
-  );
-};
+  )
+}
 
-const $base: TextStyle = {color: colors.tokens.textBase};
+const $base: TextStyle = {color: colors.tokens.textBase}
 
 const $presets = {
   display: {fontSize: 36, lineHeight: 44, fontFamily: fonts.primary.regular},
@@ -49,4 +49,4 @@ const $presets = {
   label1: {fontSize: 14, lineHeight: 20, fontFamily: fonts.primary.bold},
   label2: {fontSize: 12, lineHeight: 16, fontFamily: fonts.primary.bold},
   body: {fontSize: 14, lineHeight: 20, fontFamily: fonts.primary.regular},
-} satisfies Record<string, StyleProp<TextStyle>>;
+} satisfies Record<string, StyleProp<TextStyle>>

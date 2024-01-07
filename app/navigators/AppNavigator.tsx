@@ -8,17 +8,17 @@ import {
   DarkTheme,
   DefaultTheme,
   NavigationContainer,
-} from '@react-navigation/native';
+} from '@react-navigation/native'
 import {
   NativeStackScreenProps,
   createNativeStackNavigator,
-} from '@react-navigation/native-stack';
-import React from 'react';
-import {useColorScheme} from 'react-native';
-import {GameScreen} from '../screens/GameScreen/GameScreen';
-import {GamesListScreen} from '../screens/GamesListScreen/GamesListScreen';
-import {ReviewScreen} from '../screens/ReviewScreen/ReviewScreen';
-import {TmpDevScreen} from '../screens/TmpDevScreen';
+} from '@react-navigation/native-stack'
+import React from 'react'
+import {useColorScheme} from 'react-native'
+import {GameScreen} from '../screens/GameScreen/GameScreen'
+import {GamesListScreen} from '../screens/GamesListScreen/GamesListScreen'
+import {ReviewScreen} from '../screens/ReviewScreen/ReviewScreen'
+import {TmpDevScreen} from '../screens/TmpDevScreen'
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -34,21 +34,21 @@ import {TmpDevScreen} from '../screens/TmpDevScreen';
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  TmpDevScreen: undefined;
-  GamesList: undefined;
-  Game: {gameId: string};
-  Review: {gameId: string};
-};
+  TmpDevScreen: undefined
+  GamesList: undefined
+  Game: {gameId: string}
+  Review: {gameId: string}
+}
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> =
-  NativeStackScreenProps<AppStackParamList, T>;
+  NativeStackScreenProps<AppStackParamList, T>
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
-const Stack = createNativeStackNavigator<AppStackParamList>();
+const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = () => {
   return (
-    <Stack.Navigator initialRouteName="TmpDevScreen" >
+    <Stack.Navigator initialRouteName="TmpDevScreen">
       <Stack.Screen
         name="TmpDevScreen"
         component={TmpDevScreen}
@@ -66,14 +66,14 @@ const AppStack = () => {
         options={{presentation: 'modal'}}
       />
     </Stack.Navigator>
-  );
-};
+  )
+}
 
 export interface NavigationProps
   extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
 
 export const AppNavigator = (props: NavigationProps) => {
-  const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme()
 
   return (
     <NavigationContainer
@@ -81,5 +81,5 @@ export const AppNavigator = (props: NavigationProps) => {
       {...props}>
       <AppStack />
     </NavigationContainer>
-  );
-};
+  )
+}

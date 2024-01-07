@@ -1,6 +1,6 @@
-import React from 'react';
-import {Text} from '../../components/Text';
+import React from 'react'
+import {Text} from '../../components/Text'
 
 export const GamesListScreen = () => {
-  return <Text text=" Games List Screen" />;
-};
+  return <Text text=" Games List Screen" />
+}
