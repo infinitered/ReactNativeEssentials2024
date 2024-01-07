@@ -10,7 +10,8 @@
     "test": "jest",
     "setup": "./scripts/setup/index",
     "postinstall": "./scripts/postinstall",
-    "clean": "./scripts/clean"
+    "clean": "./scripts/clean",
+    "generate:theme": "style-dictionary build --config ./style-dictionary.config.js"
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.9",
@@ -38,6 +39,7 @@
     "prettier": "3.1.1",
     "react-test-renderer": "18.2.0",
     "reactotron-react-native": "^5.0.4",
+    "style-dictionary": "^3.9.1",
     "typescript": "5.3.3"
   },
   "engines": {
