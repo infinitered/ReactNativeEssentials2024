@@ -11,7 +11,7 @@
     "setup": "./scripts/setup/index",
     "postinstall": "./scripts/postinstall",
     "clean": "./scripts/clean",
-    "generate:theme": "style-dictionary build --config ./style-dictionary.config.js"
+    "generate:theme": "style-dictionary build --config ./sd.config.js"
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.9",
