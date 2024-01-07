@@ -13,7 +13,7 @@ interface TextProps extends RNTextProps {
    */
   preset?: keyof typeof $presets;
   /**
-   * The text to display if not using `tx` or nested components.
+   * The text to display.
    */
   text?: string;
 }
