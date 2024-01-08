@@ -7,7 +7,7 @@ export interface Game {
   description: string
   imageBackground: string
   image: string
-  releaseDate: number
+  releaseDate: string
   genre: string
   studio: string
 }
