@@ -19,6 +19,12 @@ import {GameScreen} from '../screens/GameScreen/GameScreen'
 import {GamesListScreen} from '../screens/GamesListScreen/GamesListScreen'
 import {ReviewScreen} from '../screens/ReviewScreen/ReviewScreen'
 import {TmpDevScreen} from '../screens/TmpDevScreen'
+import {MMKV} from 'react-native-mmkv'
+import {safeParse} from '../utils/safeParse'
+
+export const storage = new MMKV({id: '@RNEssentials/navigation/state'})
+
+const initNavigation = safeParse(storage.getString('state'), undefined)
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -77,7 +83,9 @@ export const AppNavigator = (props: NavigationProps) => {
 
   return (
     <NavigationContainer
+      initialState={initNavigation}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+      onStateChange={state => storage.set('state', JSON.stringify(state))}
       {...props}>
       <AppStack />
     </NavigationContainer>
