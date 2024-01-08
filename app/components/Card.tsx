@@ -25,7 +25,12 @@ export const Card = (props: CardProps) => {
       <Pressable style={$card} onPress={onPress}>
         <Image source={{uri: image}} style={$image} />
         <View style={$contentWrapper}>
-          <Text preset="headline2" text={name} style={$title} />
+          <Text
+            numberOfLines={1}
+            preset="headline2"
+            text={name}
+            style={$title}
+          />
           <Text preset="label2" style={$released}>
             Released: <Text preset="title2" text={releaseDate} />
           </Text>
