@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   Pressable,
   PressableProps,
@@ -7,49 +7,49 @@ import {
   TextStyle,
   View,
   ViewStyle,
-} from 'react-native';
-import {colors, sizes} from '../theme';
-import {Icon, IconProps} from './Icon';
-import {Text} from './Text';
+} from 'react-native'
+import {colors, sizes} from '../theme'
+import {Icon, IconProps} from './Icon'
+import {Text} from './Text'
 
 interface ButtonProps extends Omit<PressableProps, 'children'> {
   /**
    * The text to display.
    */
-  text?: string;
+  text?: string
   /**
    * The icon to be displayed before the text.
    */
-  icon?: IconProps['name'];
+  icon?: IconProps['name']
   /**
    * Override the style of the button face element.
    */
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>
 }
 
 export const Button = (props: ButtonProps) => {
-  const {text, icon, style: $faceOverride, ...RestPressableProps} = props;
+  const {text, icon, style: $faceOverride, ...RestPressableProps} = props
 
   const $reflectionStyle: PressableProps['style'] = state => [
     $reflection,
     state.pressed && $reflectionPressed,
-  ];
+  ]
 
   const $faceStyle: PressableProps['style'] = state => [
     $face,
     $faceOverride,
     state.pressed && $facePressed,
-  ];
+  ]
 
   const $textStyle: PressableProps['style'] = state => [
     $text,
     state.pressed && $textPressed,
-  ];
+  ]
 
   const iconColor = (state: PressableStateCallbackType) =>
     state.pressed
       ? colors.tokens.textButtonPressed
-      : colors.tokens.textButtonBase;
+      : colors.tokens.textButtonBase
 
   return (
     <Pressable {...RestPressableProps} style={$pressable}>
@@ -65,12 +65,12 @@ export const Button = (props: ButtonProps) => {
         </>
       )}
     </Pressable>
-  );
-};
+  )
+}
 
 const $pressable: ViewStyle = {
   height: sizes.tokens.spacingButtonHeight,
-};
+}
 
 const $reflection: ViewStyle = {
   position: 'absolute',
@@ -80,11 +80,11 @@ const $reflection: ViewStyle = {
   right: -sizes.tokens.spacingButtonReflectionOffset,
   borderRadius: sizes.radius.md,
   backgroundColor: colors.tokens.backgroundButtonReflectionBase,
-};
+}
 
 const $reflectionPressed: ViewStyle = {
   backgroundColor: colors.tokens.backgroundButtonReflectionPressed,
-};
+}
 
 const $face: ViewStyle = {
   flex: 1,
@@ -97,17 +97,17 @@ const $face: ViewStyle = {
   columnGap: sizes.spacing.xs,
   backgroundColor: colors.tokens.backgroundButtonBase,
   borderColor: colors.tokens.borderButtonBase,
-};
+}
 
 const $facePressed: ViewStyle = {
   backgroundColor: colors.tokens.backgroundButtonPressed,
   borderColor: colors.tokens.borderButtonPressed,
-};
+}
 
 const $text: TextStyle = {
   color: colors.tokens.textButtonBase,
-};
+}
 
 const $textPressed: TextStyle = {
   color: colors.tokens.textButtonPressed,
-};
+}

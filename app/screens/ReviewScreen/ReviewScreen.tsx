@@ -1,6 +1,6 @@
-import React from 'react';
-import {Text} from '../../components/Text';
+import React from 'react'
+import {Text} from '../../components/Text'
 
 export const ReviewScreen = () => {
-  return <Text text="Review Screen" />;
-};
+  return <Text text="Review Screen" />
+}
