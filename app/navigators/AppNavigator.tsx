@@ -14,7 +14,7 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack'
 import React from 'react'
-import {Pressable, useColorScheme} from 'react-native'
+import {Pressable, useColorScheme, type ViewStyle} from 'react-native'
 import {GameDetailsScreen} from '../screens/GameDetailsScreen/GameDetailsScreen'
 import {GamesListScreen} from '../screens/GamesListScreen/GamesListScreen'
 import {ReviewScreen} from '../screens/ReviewScreen/ReviewScreen'
@@ -23,6 +23,7 @@ import {MMKV} from 'react-native-mmkv'
 import {safeParse} from '../utils/safeParse'
 import {colors, fonts} from '../theme'
 import FeatherIcons from '@expo/vector-icons/Feather'
+import {spacing12} from '../theme/tokens/sizePrimitives'
 
 export const storage = new MMKV({id: '@RNEssentials/navigation/state'})
 
@@ -64,7 +65,7 @@ const AppStack = () => {
       screenOptions={({navigation}) => ({
         headerLeft: () =>
           navigation.canGoBack() && (
-            <Pressable onPress={() => navigation.goBack()}>
+            <Pressable style={$backButton} onPress={() => navigation.goBack()}>
               <FeatherIcons
                 name="arrow-left-circle"
                 size={30}
@@ -116,4 +117,8 @@ export const AppNavigator = (props: NavigationProps) => {
       <AppStack />
     </NavigationContainer>
   )
+}
+
+const $backButton: ViewStyle = {
+  marginRight: spacing12,
 }
