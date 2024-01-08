@@ -220,7 +220,7 @@ const $description: TextStyle = {
 
 const $imageWrapper: ViewStyle = {
   borderColor: colors.tokens.borderBase,
-  borderBottomWidth: 2,
+  borderBottomWidth: sizes.border.sm,
 }
 
 const $imageBackground: ImageStyle = {
@@ -230,8 +230,8 @@ const $imageBackground: ImageStyle = {
 
 const $image: ImageStyle = {
   borderColor: colors.tokens.borderBase,
-  borderRadius: 12,
-  borderWidth: 2,
+  borderRadius: sizes.radius.sm,
+  borderWidth: sizes.border.sm,
   height: 153,
   marginEnd: sizes.spacing.md,
   width: 115,
@@ -253,13 +253,13 @@ const $reviewButton: ViewStyle = {
 const $reviewsWrapper: ViewStyle = {
   backgroundColor: colors.tokens.backgroundSurface200,
   borderColor: colors.tokens.borderBase,
-  borderTopWidth: 2,
+  borderTopWidth: sizes.border.sm,
   marginTop: sizes.spacing.md,
 }
 
 const $reviewWrapper: ViewStyle = {
   borderColor: colors.tokens.borderBase,
-  borderBottomWidth: 2,
+  borderBottomWidth: sizes.border.sm,
   paddingHorizontal: sizes.spacing.md,
   paddingVertical: sizes.spacing.md,
 }
