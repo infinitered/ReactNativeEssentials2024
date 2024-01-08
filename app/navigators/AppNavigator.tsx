@@ -14,13 +14,15 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack'
 import React from 'react'
-import {useColorScheme} from 'react-native'
+import {Pressable, useColorScheme} from 'react-native'
 import {GameDetailsScreen} from '../screens/GameDetailsScreen/GameDetailsScreen'
 import {GamesListScreen} from '../screens/GamesListScreen/GamesListScreen'
 import {ReviewScreen} from '../screens/ReviewScreen/ReviewScreen'
 import {TmpDevScreen} from '../screens/TmpDevScreen'
 import {MMKV} from 'react-native-mmkv'
 import {safeParse} from '../utils/safeParse'
+import {colors, fonts} from '../theme'
+import FeatherIcons from '@expo/vector-icons/Feather'
 
 export const storage = new MMKV({id: '@RNEssentials/navigation/state'})
 
@@ -57,7 +59,28 @@ const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = () => {
   return (
-    <Stack.Navigator initialRouteName="TmpDevScreen">
+    <Stack.Navigator
+      initialRouteName="TmpDevScreen"
+      screenOptions={({navigation}) => ({
+        headerLeft: () =>
+          navigation.canGoBack() && (
+            <Pressable onPress={() => navigation.goBack()}>
+              <FeatherIcons
+                name="arrow-left-circle"
+                size={30}
+                color={colors.tokens.textBase}
+              />
+            </Pressable>
+          ),
+        headerStyle: {
+          backgroundColor: colors.tokens.backgroundHeaderList,
+        },
+        headerTintColor: colors.tokens.textBase,
+        headerTitleStyle: {
+          fontSize: 24,
+          fontFamily: fonts.primary.semiBold,
+        },
+      })}>
       <Stack.Screen
         name="TmpDevScreen"
         component={TmpDevScreen}
