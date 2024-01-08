@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -e 
+
+# Runs eslint (and eslint prettier plugin) for the specified extensions.
+eslint . --fix --ext .js,.ts,.tsx,.cjs,.mjs --cache
+
+# Additionally format files outside of eslint's scope.
+prettier --write "**/*.{json,md,yml,yaml}" .eslintrc.js --cache
+

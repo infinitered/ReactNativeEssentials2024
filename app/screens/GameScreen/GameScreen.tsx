@@ -1,6 +1,6 @@
-import React from 'react';
-import {Text} from '../../components/Text';
-import {type ScreenProps} from '../../navigators/AppNavigator';
+import React from 'react'
+import {Text} from '../../components/Text'
+import {type ScreenProps} from '../../navigators/AppNavigator'
 import {
   Image,
   ImageBackground,
@@ -8,12 +8,12 @@ import {
   ScrollView,
   type ViewStyle,
   View,
-} from 'react-native';
-import {useGlobalState} from '../../services/state';
+} from 'react-native'
+import {useGlobalState} from '../../services/state'
 
 const useFindGame = (gameId: string) => {
-  const [isLoading, setIsLoading] = React.useState(true);
-  const {reviews} = useGlobalState();
+  const [isLoading, setIsLoading] = React.useState(true)
+  const {reviews} = useGlobalState()
   const game = {
     id: 1,
     name: 'Super Mario Bros. Wonder',
@@ -26,27 +26,27 @@ const useFindGame = (gameId: string) => {
     releaseDate: 'Oct 20, 2023',
     genre: 'Platform',
     studio: 'Nintendo',
-  };
+  }
 
   React.useEffect(() => {
     setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  }, [gameId]);
+      setIsLoading(false)
+    }, 2000)
+  }, [gameId])
 
-  return {isLoading, game, reviews: reviews[gameId] ?? []};
-};
+  return {isLoading, game, reviews: reviews[gameId] ?? []}
+}
 
 export const GameScreen = ({route}: ScreenProps<'Game'>) => {
-  const {gameId} = route.params;
-  const {isLoading, game, reviews} = useFindGame(gameId); // NOTE: this will be updated to be from the api
+  const {gameId} = route.params
+  const {isLoading, game, reviews} = useFindGame(gameId) // NOTE: this will be updated to be from the api
 
   if (isLoading) {
-    return <Text text="Loading" />;
+    return <Text text="Loading" />
   }
 
   if (!game) {
-    return <Text text="Game not found" />;
+    return <Text text="Game not found" />
   }
 
   const {
@@ -58,7 +58,7 @@ export const GameScreen = ({route}: ScreenProps<'Game'>) => {
     releaseDate,
     genre,
     studio,
-  } = game;
+  } = game
 
   return (
     <ScrollView contentContainerStyle={$contentContainer}>
@@ -84,29 +84,29 @@ export const GameScreen = ({route}: ScreenProps<'Game'>) => {
         ))}
       </View>
     </ScrollView>
-  );
-};
+  )
+}
 
 const $contentContainer: ViewStyle = {
   flex: 1,
-};
+}
 
 const $wrapper: ViewStyle = {
   padding: 20,
-};
+}
 
 const $content: ViewStyle = {
   alignSelf: 'flex-end',
-};
+}
 
 const $imageBackgroundImage: ImageStyle = {
   height: '100%',
-};
+}
 
 const $imageBackground: ImageStyle = {
   height: '25%',
   width: '100%',
-};
+}
 
 const $image: ImageStyle = {
   height: 150,
@@ -114,4 +114,4 @@ const $image: ImageStyle = {
   position: 'absolute',
   top: '50%',
   width: 100,
-};
+}
