@@ -19,7 +19,11 @@ export function TmpDevScreen() {
       style={$scrollView}
       contentContainerStyle={[$contentContainerStyle, {paddingBottom: bottom}]}>
       <Button text={button} icon="sun" onPress={() => navigate('GamesList')} />
-      <Button text={button} style={$button} />
+      <Button
+        text={button}
+        style={$button}
+        onPress={() => navigate('GameDetails', {gameId: '1'})}
+      />
       <Text preset="display" text={text} />
       <Text preset="headline1" text={text} />
       <Text preset="headline2" text={text} />

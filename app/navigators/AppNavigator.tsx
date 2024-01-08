@@ -15,7 +15,7 @@ import {
 } from '@react-navigation/native-stack'
 import React from 'react'
 import {useColorScheme} from 'react-native'
-import {GameScreen} from '../screens/GameScreen/GameScreen'
+import {GameDetailsScreen} from '../screens/GameDetailsScreen/GameDetailsScreen'
 import {GamesListScreen} from '../screens/GamesListScreen/GamesListScreen'
 import {ReviewScreen} from '../screens/ReviewScreen/ReviewScreen'
 import {TmpDevScreen} from '../screens/TmpDevScreen'
@@ -42,11 +42,14 @@ const initNavigation = safeParse(storage.getString('state'), undefined)
 export type AppStackParamList = {
   TmpDevScreen: undefined
   GamesList: undefined
-  Game: {gameId: string}
+  GameDetails: {gameId: string}
   Review: {gameId: string}
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> =
+  NativeStackScreenProps<AppStackParamList, T>
+
+export type ScreenProps<T extends keyof AppStackParamList> =
   NativeStackScreenProps<AppStackParamList, T>
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
@@ -65,7 +68,7 @@ const AppStack = () => {
         component={GamesListScreen}
         options={{title: 'Retro Games'}}
       />
-      <Stack.Screen name="Game" component={GameScreen} />
+      <Stack.Screen name="GameDetails" component={GameDetailsScreen} />
       <Stack.Screen
         name="Review"
         component={ReviewScreen}
