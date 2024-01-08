@@ -4,6 +4,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context'
 import {Button} from '../components/Button'
 import {Text} from '../components/Text'
 import {colors, sizes} from '../theme'
+import {useNavigation} from '@react-navigation/native'
 
 const text = 'Thank you, Mario! But our princess is in another castle!'
 const button = 'Get over here!'
@@ -11,11 +12,13 @@ const button = 'Get over here!'
 export function TmpDevScreen() {
   const {bottom} = useSafeAreaInsets()
 
+  const {navigate} = useNavigation()
+
   return (
     <ScrollView
       style={$scrollView}
       contentContainerStyle={[$contentContainerStyle, {paddingBottom: bottom}]}>
-      <Button text={button} icon="sun" />
+      <Button text={button} icon="sun" onPress={() => navigate('GamesList')} />
       <Button text={button} style={$button} />
       <Text preset="display" text={text} />
       <Text preset="headline1" text={text} />
