@@ -62,7 +62,7 @@ export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
   }
 
   if (!game) {
-    return <Text text="Game not found" /> // TODO!
+    return <EmptyScreen />
   }
 
   const {
@@ -120,6 +120,29 @@ export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
   )
 }
 
+const EmptyScreen = () => (
+  <View style={$scrollView}>
+    <View style={$imageWrapper}>
+      <View style={[$imageBackground, $emptyBackgroundColor]} />
+    </View>
+    <View style={$bodyShift}>
+      <View style={$bodyWrapper}>
+        <View style={$headerWrapper}>
+          <View style={[$image, $emptyBackgroundColor]} />
+        </View>
+        <View style={$emptyContentWrapper}>
+          <Icon color={colors.tokens.textEmptyBase} size={36} name="frown" />
+          <Text
+            preset="display"
+            text="There's Nothing Here..."
+            style={$emptyText}
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+)
+
 const Reviews = ({gameId}: ReviewsProps) => {
   const {reviews} = useFindGame(gameId) // NOTE: this will be updated to be from the api
   return (
@@ -144,6 +167,20 @@ const Reviews = ({gameId}: ReviewsProps) => {
 const $scrollView: ViewStyle = {
   backgroundColor: colors.tokens.backgroundSurface100,
   flex: 1,
+}
+
+const $emptyBackgroundColor: ViewStyle = {
+  backgroundColor: colors.tokens.backgroundSurface200,
+}
+
+const $emptyContentWrapper: ViewStyle = {
+  flexDirection: 'row',
+  paddingVertical: sizes.spacing.xl,
+}
+
+const $emptyText: TextStyle = {
+  color: colors.tokens.textEmptyBase,
+  marginStart: sizes.spacing.md,
 }
 
 const $bodyShift: ViewStyle = {
