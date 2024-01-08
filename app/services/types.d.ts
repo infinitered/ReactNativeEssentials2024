@@ -1,3 +1,5 @@
+import {AppStackParamList} from '../navigators/AppNavigator'
+
 export interface Game {
   id: string
   name: string
@@ -27,4 +29,10 @@ export interface GlobalStateContextData {
   toggleFavorite: ToggleFavorite
   reviews: Reviews
   appendReview: AppendReview
+}
+
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList extends AppStackParamList {}
+  }
 }

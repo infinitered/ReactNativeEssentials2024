@@ -22,7 +22,7 @@ export function TmpDevScreen() {
       <Button
         text={button}
         style={$button}
-        onPress={() => navigate('Game', {gameId: '1'})}
+        onPress={() => navigate('GameDetails', {gameId: '1'})}
       />
       <Text preset="display" text={text} />
       <Text preset="headline1" text={text} />
