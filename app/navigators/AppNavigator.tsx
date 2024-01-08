@@ -8,6 +8,7 @@ import {
   DarkTheme,
   DefaultTheme,
   NavigationContainer,
+  NavigationHelpers,
 } from '@react-navigation/native'
 import {
   NativeStackScreenProps,
@@ -22,7 +23,7 @@ import {TmpDevScreen} from '../screens/TmpDevScreen'
 import {MMKV} from 'react-native-mmkv'
 import {safeParse} from '../utils/safeParse'
 import {colors, fonts} from '../theme'
-import FeatherIcons from '@expo/vector-icons/Feather'
+import {Icon} from '../components/Icon'
 import {spacing12} from '../theme/tokens/sizePrimitives'
 
 export const storage = new MMKV({id: '@RNEssentials/navigation/state'})
@@ -58,21 +59,26 @@ export type ScreenProps<T extends keyof AppStackParamList> =
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
 const Stack = createNativeStackNavigator<AppStackParamList>()
 
+const renderBackButton = (navigation: NavigationHelpers<AppStackParamList>) => {
+  return (
+    navigation.canGoBack() && (
+      <Pressable style={$backButton} onPress={() => navigation.goBack()}>
+        <Icon
+          name="arrow-left-circle"
+          size={30}
+          color={colors.tokens.textBase}
+        />
+      </Pressable>
+    )
+  )
+}
+
 const AppStack = () => {
   return (
     <Stack.Navigator
       initialRouteName="TmpDevScreen"
       screenOptions={({navigation}) => ({
-        headerLeft: () =>
-          navigation.canGoBack() && (
-            <Pressable style={$backButton} onPress={() => navigation.goBack()}>
-              <FeatherIcons
-                name="arrow-left-circle"
-                size={30}
-                color={colors.tokens.textBase}
-              />
-            </Pressable>
-          ),
+        headerLeft: () => renderBackButton(navigation),
         headerStyle: {
           backgroundColor: colors.tokens.backgroundHeaderList,
         },
