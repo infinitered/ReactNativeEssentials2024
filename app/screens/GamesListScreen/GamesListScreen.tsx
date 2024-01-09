@@ -6,6 +6,7 @@ import {Card} from '../../components/Card'
 import {api} from '../../services/api'
 import {useGlobalState} from '../../services/state'
 import {colors, sizes} from '../../theme'
+import {Empty} from '../../components/Empty'
 
 export const GamesListScreen = () => {
   const {bottom: paddingBottom} = useSafeAreaInsets()
@@ -32,6 +33,7 @@ export const GamesListScreen = () => {
       style={$list}
       keyExtractor={item => String(item.id)}
       contentContainerStyle={[{paddingBottom}, $contentContainer]}
+      ListEmptyComponent={<Empty />}
       renderItem={({item}) => (
         <Card
           onPress={() => navigation.navigate('GameDetails', {gameId: item.id})}

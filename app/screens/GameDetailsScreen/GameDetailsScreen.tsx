@@ -52,19 +52,27 @@ export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
 
   return (
     <ScrollView style={$scrollView} contentContainerStyle={$contentContainer}>
-      <Image
-        blurRadius={10}
-        source={{uri: screenshots?.[0].imageUrl}}
-        style={$imageBackground}
-      />
+      {screenshots ? (
+        <Image
+          blurRadius={10}
+          source={{uri: screenshots?.[0].imageUrl}}
+          style={$imageBackground}
+        />
+      ) : (
+        <View style={$imageBackground} />
+      )}
 
       <View style={$bodyWrapper}>
         <View style={$headerWrapper}>
-          <Image
-            resizeMode="cover"
-            source={{uri: cover?.imageUrl}}
-            style={$image}
-          />
+          {cover ? (
+            <Image
+              resizeMode="cover"
+              source={{uri: cover?.imageUrl}}
+              style={$image}
+            />
+          ) : (
+            <View style={$image} />
+          )}
 
           <Text preset="headline1" text={name} />
         </View>
@@ -132,11 +140,7 @@ const Reviews = ({gameId}: ReviewsProps) => {
 
   return (
     <>
-      <View
-        style={[
-          $reviewsHeaderWrapper,
-          reviews.length === 0 && {paddingBottom},
-        ]}>
+      <View style={$reviewsHeaderWrapper}>
         <Text preset="label2">
           Reviews: <Text preset="title2" text={reviews.length.toString()} />
         </Text>
@@ -148,16 +152,18 @@ const Reviews = ({gameId}: ReviewsProps) => {
         />
       </View>
 
-      {reviews.map((review, index) => (
-        <View
-          key={index}
-          style={[
-            $reviewWrapper,
-            index + 1 === reviews.length && {paddingBottom},
-          ]}>
-          <Text text={review} />
-        </View>
-      ))}
+      <View style={[reviews.length === 0 && {paddingBottom}]}>
+        {reviews.map((review, index) => (
+          <View
+            key={index}
+            style={[
+              $reviewWrapper,
+              index + 1 === reviews.length && {paddingBottom},
+            ]}>
+            <Text text={review} />
+          </View>
+        ))}
+      </View>
     </>
   )
 }
