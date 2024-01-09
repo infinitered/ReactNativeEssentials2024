@@ -78,6 +78,10 @@ const AppStack = () => {
     <Stack.Navigator
       initialRouteName="TmpDevScreen"
       screenOptions={({navigation}) => ({
+        contentStyle: {
+          borderTopColor: colors.tokens.textBase,
+          borderTopWidth: 2,
+        },
         headerLeft: () => renderBackButton(navigation),
         headerStyle: {
           backgroundColor: colors.tokens.backgroundHeaderList,
