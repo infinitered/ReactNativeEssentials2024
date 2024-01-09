@@ -5,6 +5,7 @@ import {Button} from '../components/Button'
 import {Text} from '../components/Text'
 import {colors, sizes} from '../theme'
 import {useNavigation} from '@react-navigation/native'
+import {Switch} from '../components/Switch'
 
 const text = 'Thank you, Mario! But our princess is in another castle!'
 const button = 'Get over here!'
@@ -24,6 +25,8 @@ export function TmpDevScreen() {
         style={$button}
         onPress={() => navigate('GameDetails', {gameId: '1'})}
       />
+      <Switch isEnabled={false} toggleSwitch={() => {}} />
+      <Switch isEnabled toggleSwitch={() => {}} />
       <Text preset="display" text={text} />
       <Text preset="headline1" text={text} />
       <Text preset="headline2" text={text} />
