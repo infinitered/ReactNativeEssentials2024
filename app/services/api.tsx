@@ -1,13 +1,13 @@
-import {Game} from './types'
+import {Game, PostGamesParams} from './types'
 
-const BASE_URL = 'https://a6f9e791-ae6a-4a83-a4df-0d5dca932634.mock.pstmn.io'
+const BASE_URL = 'https://api.retrogames.dev'
 
 async function safeFetch<ResponseT>(
   path: string,
   options?: RequestInit,
 ): Promise<{ok: true; data: ResponseT} | {ok: false}> {
   try {
-    const response = await fetch(BASE_URL + path, options)
+    const response = await fetch(BASE_URL + path, {method: 'POST', ...options})
 
     if (!response.ok) {
       return {ok: false}
@@ -26,6 +26,8 @@ async function safeFetch<ResponseT>(
 }
 
 export const api = {
-  getGames: () => safeFetch<Game[]>('/games'),
+  getGames: (params: PostGamesParams = {}) =>
+    safeFetch<Game[]>('/games', {body: JSON.stringify(params)}),
+
   getGame: (id: number) => safeFetch<Game>(`/games/${id}`),
 }

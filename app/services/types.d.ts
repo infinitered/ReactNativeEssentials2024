@@ -1,17 +1,27 @@
 import {AppStackParamList} from '../navigators/AppNavigator'
 
+export interface PostGamesParams {
+  sortBy?: Extract<
+    keyof Game,
+    'id' | 'totalRatingStars' | 'name' | 'releaseDate'
+  >
+  sortOrder?: 'asc' | 'desc'
+  limit?: number
+  offset?: number
+}
+
 export interface Game {
   id: number
   cover: GameCover
   genres: GameGenre[]
   involvedCompanies: GameInvolvedCompany[]
   name: string
-  releaseDates: GameReleaseDate[]
+  releaseDate: GameReleaseDate
   screenshots: GameCover[]
   summary: string
   totalRating: number
   totalRatingCount: number
-  totalRatingStarsRounded: number
+  totalRatingStars: number
 }
 
 export interface GameCover {

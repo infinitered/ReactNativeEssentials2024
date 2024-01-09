@@ -8,6 +8,9 @@ import {
 import {AppNavigator} from './navigators/AppNavigator'
 import {GlobalStateProvider} from './services/state'
 import {customFontsToLoad} from './theme'
+import {setupMockServer} from '../msw'
+
+setupMockServer()
 
 if (__DEV__) {
   import('./ReactotronConfig').then(() => console.log('Reactotron Configured'))

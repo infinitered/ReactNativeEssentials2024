@@ -38,8 +38,8 @@ export const GamesListScreen = () => {
         <Card
           onPress={() => navigation.navigate('GameDetails', {gameId: item.id})}
           name={item.name}
-          rating={item.totalRatingStarsRounded}
-          releaseDate={item.releaseDates?.[0]?.human}
+          rating={item.totalRatingStars}
+          releaseDate={item.releaseDate.human}
           imageUrl={item.cover.imageUrl}
         />
       )}
