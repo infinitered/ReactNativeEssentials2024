@@ -42,8 +42,8 @@ const initNavigation = safeParse(storage.getString('state'), undefined)
 export type AppStackParamList = {
   TmpDevScreen: undefined
   GamesList: undefined
-  GameDetails: {gameId: string}
-  Review: {gameId: string}
+  GameDetails: {gameId: number}
+  Review: {gameId: number}
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> =
