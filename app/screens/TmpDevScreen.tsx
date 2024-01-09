@@ -5,6 +5,7 @@ import {Button} from '../components/Button'
 import {Text} from '../components/Text'
 import {colors, sizes} from '../theme'
 import {useNavigation} from '@react-navigation/native'
+import {Switch} from '../components/Switch'
 import {Card} from '../components/Card'
 import {Pill} from '../components/Pill'
 
@@ -26,6 +27,8 @@ export function TmpDevScreen() {
         style={$button}
         onPress={() => navigate('GameDetails', {gameId: '1'})}
       />
+      <Switch isEnabled={false} toggleSwitch={() => {}} />
+      <Switch isEnabled toggleSwitch={() => {}} />
       <Card
         name="Super Mario Bros. Wonder"
         rating={4}
