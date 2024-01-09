@@ -8,7 +8,6 @@ import {useNavigation} from '@react-navigation/native'
 import {Card} from '../components/Card'
 
 const text = 'Thank you, Mario! But our princess is in another castle!'
-const button = 'Get over here!'
 
 export function TmpDevScreen() {
   const {bottom} = useSafeAreaInsets()
@@ -19,18 +18,22 @@ export function TmpDevScreen() {
     <ScrollView
       style={$scrollView}
       contentContainerStyle={[$contentContainerStyle, {paddingBottom: bottom}]}>
-      <Button text={button} icon="sun" onPress={() => navigate('GamesList')} />
       <Button
-        text={button}
+        text="Go To List"
+        icon="sun"
+        onPress={() => navigate('GamesList')}
+      />
+      <Button
+        text="Go To Details"
         style={$button}
-        onPress={() => navigate('GameDetails', {gameId: '1'})}
+        onPress={() => navigate('GameDetails', {gameId: 1})}
       />
       <Card
         name="Super Mario Bros. Wonder"
         rating={4}
-        image="https://images.igdb.com/igdb/image/upload/t_cover_big/co6nnl.png"
+        imageUrl="https://images.igdb.com/igdb/image/upload/t_cover_big/co6nnl.png"
         releaseDate="Oct 20, 2023"
-        onPress={() => navigate('GameDetails', {gameId: '1'})}
+        onPress={() => navigate('GameDetails', {gameId: 1})}
       />
       <Text preset="display" text={text} />
       <Text preset="headline1" text={text} />

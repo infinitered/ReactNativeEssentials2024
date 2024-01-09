@@ -1,42 +1,41 @@
 import React from 'react'
 import {
   Image,
-  type ImageStyle,
   Pressable,
-  type TextStyle,
   View,
+  type ImageStyle,
   type ViewStyle,
 } from 'react-native'
-import {type Game} from '../services/types'
-import {Text} from './Text'
-import {Icon} from './Icon'
 import {colors, sizes} from '../theme'
+import {Icon} from './Icon'
+import {Text} from './Text'
 
-interface CardProps
-  extends Pick<Game, 'name' | 'rating' | 'releaseDate' | 'image'> {
+interface CardProps {
+  name: string
+  imageUrl: string
+  releaseDate: string
+  rating: number
   onPress: () => void
 }
 
 export const Card = (props: CardProps) => {
-  const {image, name, releaseDate, rating, onPress} = props
+  const {name, imageUrl, releaseDate, rating = 0, onPress} = props
   return (
-    <View>
+    <Pressable onPress={onPress}>
       <View style={$reflection} />
-      <Pressable style={$card} onPress={onPress}>
-        <Image source={{uri: image}} style={$image} />
+      <View style={$card}>
+        <Image source={{uri: imageUrl}} style={$image} />
         <View style={$contentWrapper}>
-          <Text
-            numberOfLines={1}
-            preset="headline2"
-            text={name}
-            style={$title}
-          />
-          <Text preset="label2" style={$released}>
-            Released: <Text preset="title2" text={releaseDate} />
-          </Text>
-          <View style={$ratingWrapper}>
-            <Text preset="label2" text="Rating: " />
-            {Array.apply(0, new Array(rating)).map((_, i) => (
+          <Text numberOfLines={1} preset="headline2" text={name} />
+
+          <View style={$contentRow}>
+            <Text preset="label2" text="Released:" />
+            <Text preset="title2" text={releaseDate} />
+          </View>
+
+          <View style={$contentRow}>
+            <Text preset="label2" text="Rating:" />
+            {Array.from({length: rating}).map((_, i) => (
               <Icon
                 color={colors.tokens.borderRatingActive}
                 key={i}
@@ -45,8 +44,8 @@ export const Card = (props: CardProps) => {
             ))}
           </View>
         </View>
-      </Pressable>
-    </View>
+      </View>
+    </Pressable>
   )
 }
 
@@ -57,6 +56,7 @@ const $card: ViewStyle = {
   borderWidth: sizes.border.sm,
   flexDirection: 'row',
   padding: sizes.spacing.md,
+  columnGap: sizes.spacing.md,
 }
 
 const $reflection: ViewStyle = {
@@ -71,8 +71,8 @@ const $reflection: ViewStyle = {
 
 const $contentWrapper: ViewStyle = {
   flex: 1,
-  marginStart: sizes.spacing.md,
   justifyContent: 'center',
+  rowGap: sizes.spacing.xs,
 }
 
 const $image: ImageStyle = {
@@ -83,15 +83,8 @@ const $image: ImageStyle = {
   width: 90,
 }
 
-const $title: TextStyle = {
-  marginBottom: sizes.spacing.xs,
-}
-
-const $released: TextStyle = {
-  marginBottom: sizes.spacing.xs,
-}
-
-const $ratingWrapper: ViewStyle = {
-  alignItems: 'center',
+const $contentRow: ViewStyle = {
   flexDirection: 'row',
+  columnGap: sizes.spacing.xs,
+  alignItems: 'center',
 }
