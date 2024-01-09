@@ -8,19 +8,23 @@ import {
   DarkTheme,
   DefaultTheme,
   NavigationContainer,
+  NavigationHelpers,
 } from '@react-navigation/native'
 import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack'
 import React from 'react'
-import {useColorScheme} from 'react-native'
+import {Pressable, useColorScheme, type ViewStyle} from 'react-native'
 import {GameDetailsScreen} from '../screens/GameDetailsScreen/GameDetailsScreen'
 import {GamesListScreen} from '../screens/GamesListScreen/GamesListScreen'
 import {ReviewScreen} from '../screens/ReviewScreen/ReviewScreen'
 import {TmpDevScreen} from '../screens/TmpDevScreen'
 import {MMKV} from 'react-native-mmkv'
 import {safeParse} from '../utils/safeParse'
+import {colors, fonts} from '../theme'
+import {Icon} from '../components/Icon'
+import {spacing12} from '../theme/tokens/sizePrimitives'
 
 export const storage = new MMKV({id: '@RNEssentials/navigation/state'})
 
@@ -55,9 +59,40 @@ export type ScreenProps<T extends keyof AppStackParamList> =
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
 const Stack = createNativeStackNavigator<AppStackParamList>()
 
+const renderBackButton = (navigation: NavigationHelpers<AppStackParamList>) => {
+  return (
+    navigation.canGoBack() && (
+      <Pressable style={$backButton} onPress={() => navigation.goBack()}>
+        <Icon
+          name="arrow-left-circle"
+          size={30}
+          color={colors.tokens.textBase}
+        />
+      </Pressable>
+    )
+  )
+}
+
 const AppStack = () => {
   return (
-    <Stack.Navigator initialRouteName="TmpDevScreen">
+    <Stack.Navigator
+      initialRouteName="TmpDevScreen"
+      screenOptions={({navigation}) => ({
+        contentStyle: {
+          borderTopColor: colors.tokens.textBase,
+          borderTopWidth: 2,
+        },
+        headerLeft: () => renderBackButton(navigation),
+        headerStyle: {
+          backgroundColor: colors.tokens.backgroundHeaderList,
+        },
+        headerTitleAlign: 'center',
+        headerTintColor: colors.tokens.textBase,
+        headerTitleStyle: {
+          fontSize: 24,
+          fontFamily: fonts.primary.semiBold,
+        },
+      })}>
       <Stack.Screen
         name="TmpDevScreen"
         component={TmpDevScreen}
@@ -93,4 +128,8 @@ export const AppNavigator = (props: NavigationProps) => {
       <AppStack />
     </NavigationContainer>
   )
+}
+
+const $backButton: ViewStyle = {
+  marginRight: spacing12,
 }
