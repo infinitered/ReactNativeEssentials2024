@@ -1,15 +1,42 @@
 import {AppStackParamList} from '../navigators/AppNavigator'
 
 export interface Game {
-  id: string
+  id: number
+  cover: GameCover
+  genres: GameGenre[]
+  involvedCompanies: GameInvolvedCompany[]
   name: string
-  rating: number
-  description: string
-  imageBackground: string
-  image: string
-  releaseDate: string
-  genre: string
-  studio: string
+  releaseDates: GameReleaseDate[]
+  screenshots: GameCover[]
+  summary: string
+  totalRating: number
+  totalRatingCount: number
+  totalRatingStarsRounded: number
+}
+
+export interface GameCover {
+  id: number
+  imageId: string
+  imageUrl: string
+}
+
+export interface GameGenre {
+  id: number
+  name: string
+}
+
+export interface GameInvolvedCompany {
+  id: number
+  company: GameGenre
+  developer: boolean
+  publisher: boolean
+}
+
+export interface GameReleaseDate {
+  id: number
+  date: number
+  human: string
+  y: number
 }
 
 export type SetGames = (games: Array<Game>) => void
