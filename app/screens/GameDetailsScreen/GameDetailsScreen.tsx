@@ -1,166 +1,164 @@
-import React from 'react'
-import {Text} from '../../components/Text'
-import {type ScreenProps} from '../../navigators/AppNavigator'
+import React, {useCallback, useEffect, useState} from 'react'
 import {
   Image,
-  type ImageStyle,
   ScrollView,
-  type ViewStyle,
   View,
+  type ImageStyle,
   type TextStyle,
+  type ViewStyle,
 } from 'react-native'
-import {useGlobalState} from '../../services/state'
-import {colors, sizes} from '../../theme'
+import {useSafeAreaInsets} from 'react-native-safe-area-context'
 import {Button} from '../../components/Button'
+import {Empty} from '../../components/Empty'
 import {Icon} from '../../components/Icon'
+import {Text} from '../../components/Text'
+import {type ScreenProps} from '../../navigators/AppNavigator'
+import {api} from '../../services/api'
+import {useGlobalState} from '../../services/state'
+import {Game} from '../../services/types'
+import {colors, sizes} from '../../theme'
 
 interface ReviewsProps {
-  gameId: string
-}
-
-const useFindGame = (gameId: string) => {
-  const [isLoading, setIsLoading] = React.useState(true)
-  const {reviews} = useGlobalState()
-  const game = {
-    id: 1,
-    name: 'Super Mario Bros. Wonder',
-    rating: 4,
-    description:
-      'The next evolution of 2D side-scrolling Super Mario Bros. games is headed to Nintendo Switch!\n\nWhen you touch a Wonder Flower in the game, the wonders of the world unlock – pipes could come alive, hordes of enemies may appear, characters might change their looks, for example – transforming the gameplay in unpredictable ways. Excitement and different surprises await in each course. Super Mario Bros. Wonder features Princess Peach, Princess Daisy and Yoshi as playable characters, in addition to familiar characters like Mario, Luigi and Toad.',
-    imageBackground:
-      'https://images.igdb.com/igdb/image/upload/t_screenshot_big/scn3et.jpg',
-    image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co6nnl.png',
-    releaseDate: 'Oct 20, 2023',
-    genre: 'Platform',
-    studio: 'Nintendo',
-  }
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 2000)
-  }, [gameId])
-
-  return {
-    isLoading,
-    game,
-    reviews: [
-      'If you liked the first two Spyro games, you will like this one.',
-      "I liked the first Spyro, in particular its linearity: the levels were simple to navigate, the paths were clear to see, and if there was an area that was difficult to access, it was generally optional. The only challenge was the enemies and their variety. The second Spyro introduced the idea of gems-for-minigames, which I did not love, to be honest, especially for the vague emphasis on the fact that you have to do them to eventually progress. The third Spyro took it to the extreme, and it's basically unplayable if you want to play a game that resembles the first Spyro.",
-      'The levels are a mess that is hard to navigate, you have to collect eggs to progress (which means searching the levels to the eternity) from the very beginning, and enemies are not the focus anymore. In other words, Spyro 3 is the worst of the two games, and I am extremely disappointed.',
-    ],
-  } // reviews[gameId] ?? [] // TODO: REVERT ME
+  gameId: number
 }
 
 export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
-  // const {gameId} = route.params // TODO: REVERT ME
-  const gameId = '1'
-  const {isLoading, game} = useFindGame(gameId) // TODO: this will be updated to be from the api
+  const gameId = route.params.gameId
 
-  if (isLoading) {
-    return <Text text="Loading" />
-  }
+  const [game, setGame] = useState<Game | undefined>()
 
-  if (!game) {
-    return <EmptyScreen />
-  }
+  const getGame = useCallback(async () => {
+    const response = await api.getGame(gameId)
+
+    if (response.ok) {
+      setGame(response.data)
+    }
+  }, [setGame, gameId])
+
+  useEffect(() => {
+    getGame()
+  }, [getGame])
 
   const {
+    cover,
+    screenshots,
     name,
-    rating,
-    description,
-    imageBackground,
-    image,
-    releaseDate,
-    genre,
-    studio,
-  } = game
+    releaseDates,
+    genres,
+    involvedCompanies,
+    totalRatingStarsRounded,
+    summary,
+  } = game ?? {}
 
   return (
-    <ScrollView style={$scrollView}>
-      <View style={$imageWrapper}>
-        <Image
-          blurRadius={10}
-          source={{uri: imageBackground}}
-          style={$imageBackground}
-        />
-      </View>
-      <View style={$bodyShift}>
-        <View style={$bodyWrapper}>
-          <View style={$headerWrapper}>
-            <Image resizeMode="cover" source={{uri: image}} style={$image} />
-            <Text preset="headline1" text={name} style={$name} />
-          </View>
-          <View style={$informationWrapper}>
-            <Text preset="label2" style={$informationText}>
-              Released: <Text preset="title2" text={releaseDate} />
-            </Text>
-            <Text preset="label2" style={$informationText}>
-              Genre: <Text preset="title2" text={genre} />
-            </Text>
-            <Text preset="label2" style={$informationText}>
-              Studio: <Text preset="title2" text={studio} />
-            </Text>
-            <View style={$ratingWrapper}>
-              <Text preset="label2" text="Rating: " />
-              {Array.apply(0, new Array(rating)).map((_, i) => (
-                <Icon
-                  color={colors.tokens.borderRatingActive}
-                  key={i}
-                  name="star"
-                />
-              ))}
-            </View>
-          </View>
-          <Text text={description} style={$description} />
+    <ScrollView style={$scrollView} contentContainerStyle={$contentContainer}>
+      <Image
+        blurRadius={10}
+        source={{uri: screenshots?.[0].imageUrl}}
+        style={$imageBackground}
+      />
+
+      <View style={$bodyWrapper}>
+        <View style={$headerWrapper}>
+          <Image
+            resizeMode="cover"
+            source={{uri: cover?.imageUrl}}
+            style={$image}
+          />
+
+          <Text preset="headline1" text={name} />
         </View>
-        <Reviews gameId={gameId} />
+
+        {!game ? (
+          <Empty />
+        ) : (
+          <>
+            <View style={$informationWrapper}>
+              <View style={$informationRow}>
+                <Text preset="label2" text="Released:" />
+                <Text
+                  preset="title2"
+                  text={releaseDates?.[0].human}
+                  style={$informationValue}
+                />
+              </View>
+              <View style={$informationRow}>
+                <Text preset="label2" text="Genre:" />
+                <Text
+                  preset="title2"
+                  text={genres?.map(g => g.name).join(', ')}
+                  style={$informationValue}
+                />
+              </View>
+              <View style={$informationRow}>
+                <Text preset="label2" text="Studio:" />
+                <Text
+                  preset="title2"
+                  text={involvedCompanies?.map(c => c.company.name).join(', ')}
+                  style={$informationValue}
+                />
+              </View>
+              <View style={[$informationRow, $ratingWrapper]}>
+                <Text preset="label2" text="Rating: " />
+                {Array.from({length: totalRatingStarsRounded ?? 0}).map(
+                  (_, i) => (
+                    <Icon
+                      color={colors.tokens.borderRatingActive}
+                      key={i}
+                      name="star"
+                    />
+                  ),
+                )}
+              </View>
+            </View>
+
+            <View style={$descriptionWrapper}>
+              <Text text={summary} />
+            </View>
+          </>
+        )}
       </View>
+
+      <Reviews gameId={gameId} />
     </ScrollView>
   )
 }
 
-const EmptyScreen = () => (
-  <View style={$scrollView}>
-    <View style={$imageWrapper}>
-      <View style={[$imageBackground, $emptyBackgroundColor]} />
-    </View>
-    <View style={$bodyShift}>
-      <View style={$bodyWrapper}>
-        <View style={$headerWrapper}>
-          <View style={[$image, $emptyBackgroundColor]} />
-        </View>
-        <View style={$emptyContentWrapper}>
-          <Icon color={colors.tokens.textEmptyBase} size={36} name="frown" />
-          <Text
-            preset="display"
-            text="There's Nothing Here..."
-            style={$emptyText}
-          />
-        </View>
-      </View>
-    </View>
-  </View>
-)
-
 const Reviews = ({gameId}: ReviewsProps) => {
-  const {reviews} = useFindGame(gameId) // NOTE: this will be updated to be from the api
+  const state = useGlobalState()
+  const {bottom: paddingBottom} = useSafeAreaInsets()
+
+  const reviews = gameId ? state.reviews[gameId] ?? [] : []
+
   return (
-    <View style={$reviewsContainer}>
-      <Text preset="label2" style={$reviewsLabel}>
-        Reviews: <Text preset="title2" text={reviews.length.toString()} />
-      </Text>
-      <Button text="Write A Review" style={$reviewButton} />
-      {reviews.length > 0 && (
-        <View style={$reviewsWrapper}>
-          {reviews.map((review, index) => (
-            <View key={index} style={$reviewWrapper}>
-              <Text text={review} />
-            </View>
-          ))}
+    <>
+      <View
+        style={[
+          $reviewsHeaderWrapper,
+          reviews.length === 0 && {paddingBottom},
+        ]}>
+        <Text preset="label2">
+          Reviews: <Text preset="title2" text={reviews.length.toString()} />
+        </Text>
+        <Button
+          text="Write A Review"
+          onPress={() =>
+            state.appendReview(gameId, Math.random().toString(36).substr(2, 10))
+          }
+        />
+      </View>
+
+      {reviews.map((review, index) => (
+        <View
+          key={index}
+          style={[
+            $reviewWrapper,
+            index + 1 === reviews.length && {paddingBottom},
+          ]}>
+          <Text text={review} />
         </View>
-      )}
-    </View>
+      ))}
+    </>
   )
 }
 
@@ -169,63 +167,45 @@ const $scrollView: ViewStyle = {
   flex: 1,
 }
 
-const $emptyBackgroundColor: ViewStyle = {
-  backgroundColor: colors.tokens.backgroundSurface200,
-}
-
-const $emptyContentWrapper: ViewStyle = {
-  flexDirection: 'row',
-  paddingVertical: sizes.spacing.xl,
-}
-
-const $emptyText: TextStyle = {
-  color: colors.tokens.textEmptyBase,
-  marginStart: sizes.spacing.md,
-}
-
-const $bodyShift: ViewStyle = {
-  top: -50,
+const $contentContainer: ViewStyle = {
+  minHeight: '100%',
 }
 
 const $bodyWrapper: ViewStyle = {
   paddingHorizontal: sizes.spacing.md,
-}
-
-const $headerWrapper: ViewStyle = {
-  alignItems: 'flex-end',
-  flexDirection: 'row',
-  marginBottom: sizes.spacing.md,
-}
-
-const $name: TextStyle = {
   flex: 1,
 }
 
 const $informationWrapper: ViewStyle = {
   paddingVertical: sizes.spacing.md,
+  rowGap: sizes.spacing.xs,
 }
 
-const $informationText: ViewStyle = {
-  marginBottom: sizes.spacing.xs,
+const $informationRow: ViewStyle = {
+  flexDirection: 'row',
+  alignItems: 'flex-start',
+  columnGap: sizes.spacing.xs,
+}
+
+const $informationValue: TextStyle = {
+  flex: 1,
+  top: -2,
 }
 
 const $ratingWrapper: ViewStyle = {
   alignItems: 'center',
-  flexDirection: 'row',
 }
 
-const $description: TextStyle = {
-  marginVertical: sizes.spacing.md,
-}
-
-const $imageWrapper: ViewStyle = {
-  borderColor: colors.tokens.borderBase,
-  borderBottomWidth: sizes.border.sm,
+const $descriptionWrapper: ViewStyle = {
+  paddingVertical: sizes.spacing.md,
 }
 
 const $imageBackground: ImageStyle = {
   height: 175,
   width: '100%',
+  backgroundColor: colors.tokens.backgroundSurface200,
+  borderColor: colors.tokens.borderBase,
+  borderBottomWidth: sizes.border.sm,
 }
 
 const $image: ImageStyle = {
@@ -235,31 +215,25 @@ const $image: ImageStyle = {
   height: 153,
   marginEnd: sizes.spacing.md,
   width: 115,
-}
-
-const $reviewsContainer: ViewStyle = {
-  marginVertical: sizes.spacing.md,
-}
-
-const $reviewsLabel: TextStyle = {
-  marginBottom: sizes.spacing.md,
-  paddingHorizontal: sizes.spacing.md,
-}
-
-const $reviewButton: ViewStyle = {
-  marginHorizontal: sizes.spacing.md,
-}
-
-const $reviewsWrapper: ViewStyle = {
   backgroundColor: colors.tokens.backgroundSurface200,
-  borderColor: colors.tokens.borderBase,
-  borderTopWidth: sizes.border.sm,
-  marginTop: sizes.spacing.md,
+  position: 'absolute',
+}
+
+const $headerWrapper: ViewStyle = {
+  alignItems: 'flex-end',
+  flexDirection: 'row',
+  paddingVertical: sizes.spacing.md,
+  paddingLeft: ($image.width as number) + sizes.spacing.md,
+}
+
+const $reviewsHeaderWrapper: ViewStyle = {
+  padding: sizes.spacing.md,
+  rowGap: sizes.spacing.md,
 }
 
 const $reviewWrapper: ViewStyle = {
   borderColor: colors.tokens.borderBase,
-  borderBottomWidth: sizes.border.sm,
-  paddingHorizontal: sizes.spacing.md,
-  paddingVertical: sizes.spacing.md,
+  borderTopWidth: sizes.border.sm,
+  padding: sizes.spacing.md,
+  backgroundColor: colors.tokens.backgroundSurface200,
 }
