@@ -6,6 +6,7 @@ import {Text} from '../components/Text'
 import {colors, sizes} from '../theme'
 import {useNavigation} from '@react-navigation/native'
 import {Switch} from '../components/Switch'
+import {Card} from '../components/Card'
 
 const text = 'Thank you, Mario! But our princess is in another castle!'
 const button = 'Get over here!'
@@ -27,6 +28,13 @@ export function TmpDevScreen() {
       />
       <Switch isEnabled={false} toggleSwitch={() => {}} />
       <Switch isEnabled toggleSwitch={() => {}} />
+      <Card
+        name="Super Mario Bros. Wonder"
+        rating={4}
+        image="https://images.igdb.com/igdb/image/upload/t_cover_big/co6nnl.png"
+        releaseDate="Oct 20, 2023"
+        onPress={() => navigate('GameDetails', {gameId: '1'})}
+      />
       <Text preset="display" text={text} />
       <Text preset="headline1" text={text} />
       <Text preset="headline2" text={text} />
