@@ -82,6 +82,7 @@ const AppStack = () => {
         headerStyle: {
           backgroundColor: colors.tokens.backgroundHeaderList,
         },
+        headerTitleAlign: 'center',
         headerTintColor: colors.tokens.textBase,
         headerTitleStyle: {
           fontSize: 24,
