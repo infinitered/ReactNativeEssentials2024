@@ -17,7 +17,9 @@ export function setupMockServer(opts: {debug?: boolean} = {}) {
         console.log('MSW intercepted:', req.method, req.url)
       })
     }
-    server.listen()
+    server.listen({
+      onUnhandledRequest: 'bypass',
+    })
   } catch (error) {
     console.error(error)
   }

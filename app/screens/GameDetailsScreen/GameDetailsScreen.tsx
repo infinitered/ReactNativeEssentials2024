@@ -17,6 +17,7 @@ import {api} from '../../services/api'
 import {useGlobalState} from '../../services/state'
 import {Game} from '../../services/types'
 import {colors, sizes} from '../../theme'
+import {Switch} from '../../components/Switch'
 
 interface ReviewsProps {
   gameId: number
@@ -25,6 +26,7 @@ interface ReviewsProps {
 export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
   const gameId = route.params.gameId
 
+  const {favorites, toggleFavorite} = useGlobalState()
   const [game, setGame] = useState<Game | undefined>()
 
   const getGame = useCallback(async () => {
@@ -40,6 +42,7 @@ export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
   }, [getGame])
 
   const {
+    id,
     cover,
     screenshots,
     name,
@@ -61,7 +64,21 @@ export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
       ) : (
         <View style={$imageBackground} />
       )}
-
+      {id ? (
+        <View style={$favoriteWrapper}>
+          <Text
+            style={$favoriteLabel}
+            preset="title1"
+            text="Add to Favorites"
+          />
+          <Switch
+            isEnabled={Boolean(
+              favorites.find(favoriteGameId => favoriteGameId === id),
+            )}
+            toggleSwitch={() => toggleFavorite(id)}
+          />
+        </View>
+      ) : null}
       <View style={$bodyWrapper}>
         <View style={$headerWrapper}>
           {cover ? (
@@ -204,10 +221,23 @@ const $descriptionWrapper: ViewStyle = {
   paddingVertical: sizes.spacing.md,
 }
 
+const $favoriteWrapper: ViewStyle = {
+  position: 'absolute',
+  right: sizes.spacing.md,
+  top: sizes.spacing.md,
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: sizes.spacing.xs,
+}
+
+const $favoriteLabel: TextStyle = {
+  color: colors.primitives.white1000,
+}
+
 const $imageBackground: ImageStyle = {
   height: 175,
   width: '100%',
-  backgroundColor: colors.tokens.backgroundSurface200,
+  backgroundColor: colors.primitives.purpleMuted400,
   borderColor: colors.tokens.borderBase,
   borderBottomWidth: sizes.border.sm,
 }

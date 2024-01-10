@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native'
-import React, {useCallback, useEffect, useMemo} from 'react'
-import {SectionList, ViewStyle} from 'react-native'
+import React, {useCallback, useEffect, useMemo, useState} from 'react'
+import {SectionList, View, ViewStyle} from 'react-native'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
 import {Card} from '../../components/Card'
 import {Empty} from '../../components/Empty'
@@ -9,9 +9,11 @@ import {api} from '../../services/api'
 import {useGlobalState} from '../../services/state'
 import {Game} from '../../services/types'
 import {colors, sizes} from '../../theme'
+import {Text} from '../../components/Text'
+import {Switch} from '../../components/Switch'
 
 function useGameData() {
-  const {setGames, games} = useGlobalState()
+  const {favorites, games, setGames} = useGlobalState()
 
   const getGames = useCallback(async () => {
     const response = await api.getGames()
@@ -21,6 +23,8 @@ function useGameData() {
     }
   }, [setGames])
 
+  const [filterFavorites, setFilterFavorites] = useState(false)
+
   useEffect(() => {
     getGames()
   }, [getGames])
@@ -28,6 +32,8 @@ function useGameData() {
   const gamesSectionList = useMemo(() => {
     const initialValue: {[k: number]: Game[]} = {}
     const gameListMap = games.reduce((acc, curr) => {
+      if (filterFavorites && !favorites.includes(curr.id)) return acc
+
       const year = curr.releaseDate.y
       if (acc[year]) {
         acc[year].push(curr)
@@ -42,37 +48,52 @@ function useGameData() {
       key: k,
       data: v,
     }))
-  }, [games])
+  }, [games, favorites, filterFavorites])
 
-  return gamesSectionList
+  return {gamesSectionList, filterFavorites, setFilterFavorites}
 }
 
 export const GamesListScreen = () => {
   const {bottom: paddingBottom} = useSafeAreaInsets()
   const navigation = useNavigation()
-  const games = useGameData()
+  const {
+    gamesSectionList: games,
+    filterFavorites,
+    setFilterFavorites,
+  } = useGameData()
 
   return (
-    <SectionList
-      sections={games}
-      style={$list}
-      keyExtractor={item => String(item.id)}
-      contentContainerStyle={[{paddingBottom}, $contentContainer]}
-      ListEmptyComponent={<Empty />}
-      initialNumToRender={6}
-      maxToRenderPerBatch={20}
-      windowSize={31}
-      renderItem={({item}) => (
-        <Card
-          onPress={() => navigation.navigate('GameDetails', {gameId: item.id})}
-          name={item.name}
-          rating={item.totalRatingStars}
-          releaseDate={item.releaseDate.human}
-          imageUrl={item.cover.imageUrl}
+    <>
+      <View style={$favoritesFilter}>
+        <Text preset="title1" text="Show Favorites" />
+        <Switch
+          isEnabled={filterFavorites}
+          toggleSwitch={() => setFilterFavorites(!filterFavorites)}
         />
-      )}
-      renderSectionHeader={({section: {year}}) => <Pill text={year} />}
-    />
+      </View>
+      <SectionList
+        sections={games}
+        style={$list}
+        keyExtractor={item => String(item.id)}
+        contentContainerStyle={[{paddingBottom}, $contentContainer]}
+        ListEmptyComponent={<Empty />}
+        initialNumToRender={6}
+        maxToRenderPerBatch={20}
+        windowSize={31}
+        renderItem={({item}) => (
+          <Card
+            onPress={() =>
+              navigation.navigate('GameDetails', {gameId: item.id})
+            }
+            name={item.name}
+            rating={item.totalRatingStars}
+            releaseDate={item.releaseDate.human}
+            imageUrl={item.cover.imageUrl}
+          />
+        )}
+        renderSectionHeader={({section: {year}}) => <Pill text={year} />}
+      />
+    </>
   )
 }
 
@@ -83,4 +104,13 @@ const $list: ViewStyle = {
 const $contentContainer: ViewStyle = {
   rowGap: sizes.spacing.lg,
   padding: sizes.spacing.md,
+}
+
+const $favoritesFilter: ViewStyle = {
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  padding: sizes.spacing.md,
+  borderBottomColor: colors.tokens.borderBase,
+  borderBottomWidth: 2,
 }
