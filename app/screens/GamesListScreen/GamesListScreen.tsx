@@ -1,18 +1,16 @@
 import {useNavigation} from '@react-navigation/native'
-import React, {useCallback, useEffect} from 'react'
-import {FlatList, ViewStyle} from 'react-native'
+import React, {useCallback, useEffect, useMemo} from 'react'
+import {SectionList, ViewStyle} from 'react-native'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
 import {Card} from '../../components/Card'
+import {Empty} from '../../components/Empty'
+import {Pill} from '../../components/Pill'
 import {api} from '../../services/api'
 import {useGlobalState} from '../../services/state'
+import {Game} from '../../services/types'
 import {colors, sizes} from '../../theme'
-import {Empty} from '../../components/Empty'
 
-export const GamesListScreen = () => {
-  const {bottom: paddingBottom} = useSafeAreaInsets()
-
-  const navigation = useNavigation()
-
+function useGameData() {
   const {setGames, games} = useGlobalState()
 
   const getGames = useCallback(async () => {
@@ -27,13 +25,43 @@ export const GamesListScreen = () => {
     getGames()
   }, [getGames])
 
+  const gamesSectionList = useMemo(() => {
+    const initialValue: {[k: number]: Game[]} = {}
+    const gameListMap = games.reduce((acc, curr) => {
+      const year = curr.releaseDate.y
+      if (acc[year]) {
+        acc[year].push(curr)
+      } else {
+        acc[year] = [curr]
+      }
+      return acc
+    }, initialValue)
+
+    return Object.entries(gameListMap).map(([k, v]) => ({
+      year: k,
+      key: k,
+      data: v,
+    }))
+  }, [games])
+
+  return gamesSectionList
+}
+
+export const GamesListScreen = () => {
+  const {bottom: paddingBottom} = useSafeAreaInsets()
+  const navigation = useNavigation()
+  const games = useGameData()
+
   return (
-    <FlatList
-      data={games}
+    <SectionList
+      sections={games}
       style={$list}
       keyExtractor={item => String(item.id)}
       contentContainerStyle={[{paddingBottom}, $contentContainer]}
       ListEmptyComponent={<Empty />}
+      initialNumToRender={6}
+      maxToRenderPerBatch={20}
+      windowSize={31}
       renderItem={({item}) => (
         <Card
           onPress={() => navigation.navigate('GameDetails', {gameId: item.id})}
@@ -43,6 +71,7 @@ export const GamesListScreen = () => {
           imageUrl={item.cover.imageUrl}
         />
       )}
+      renderSectionHeader={({section: {year}}) => <Pill text={year} />}
     />
   )
 }
@@ -53,5 +82,5 @@ const $list: ViewStyle = {
 
 const $contentContainer: ViewStyle = {
   rowGap: sizes.spacing.lg,
-  paddingHorizontal: sizes.spacing.md,
+  padding: sizes.spacing.md,
 }

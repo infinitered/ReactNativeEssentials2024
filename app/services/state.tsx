@@ -5,16 +5,16 @@ import React, {
   useContext,
   useState,
 } from 'react'
-import {
-  type Game,
-  type Favorites,
-  type ToggleFavorite,
-  type Reviews,
-  type AppendReview,
-  type GlobalStateContextData,
-} from './types'
 import {MMKV} from 'react-native-mmkv'
 import {safeParse} from '../utils/safeParse'
+import {
+  type AppendReview,
+  type Favorites,
+  type Game,
+  type GlobalStateContextData,
+  type Reviews,
+  type ToggleFavorite,
+} from './types'
 
 export const storage = new MMKV({id: '@RNEssentials/global/state'})
 
@@ -55,7 +55,7 @@ export const GlobalStateProvider = ({children}: PropsWithChildren) => {
     (gameId, review) => {
       const newReviews = {
         ...reviews,
-        [gameId]: [...(reviews[gameId] || []), review],
+        [gameId]: [review, ...(reviews[gameId] || [])],
       }
 
       setReviews(newReviews)
