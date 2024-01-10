@@ -19,7 +19,6 @@ import {Pressable, useColorScheme, type ViewStyle} from 'react-native'
 import {GameDetailsScreen} from '../screens/GameDetailsScreen/GameDetailsScreen'
 import {GamesListScreen} from '../screens/GamesListScreen/GamesListScreen'
 import {ReviewScreen} from '../screens/ReviewScreen/ReviewScreen'
-import {TmpDevScreen} from '../screens/TmpDevScreen'
 import {MMKV} from 'react-native-mmkv'
 import {safeParse} from '../utils/safeParse'
 import {colors, fonts} from '../theme'
@@ -44,7 +43,6 @@ const initNavigation = safeParse(storage.getString('state'), undefined)
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  TmpDevScreen: undefined
   GamesList: undefined
   GameDetails: {gameId: number}
   Review: {gameId: number}
@@ -76,7 +74,7 @@ const renderBackButton = (navigation: NavigationHelpers<AppStackParamList>) => {
 const AppStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="TmpDevScreen"
+      initialRouteName="GamesList"
       screenOptions={({navigation}) => ({
         contentStyle: {
           borderTopColor: colors.tokens.textBase,
@@ -93,11 +91,6 @@ const AppStack = () => {
           fontFamily: fonts.primary.semiBold,
         },
       })}>
-      <Stack.Screen
-        name="TmpDevScreen"
-        component={TmpDevScreen}
-        options={{title: 'TmpDevScreen'}}
-      />
       <Stack.Screen
         name="GamesList"
         component={GamesListScreen}
