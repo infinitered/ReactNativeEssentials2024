@@ -82,9 +82,12 @@ export const GamesListScreen = () => {
         windowSize={31}
         renderItem={({item}) => (
           <Card
-            onPress={() =>
-              navigation.navigate('GameDetails', {gameId: item.id})
-            }
+            onPress={() => {
+              navigation.navigate('GameDetails', {
+                gameId: item.id,
+                name: item.name,
+              })
+            }}
             name={item.name}
             rating={item.totalRatingStars}
             releaseDate={item.releaseDate.human}
@@ -113,4 +116,5 @@ const $favoritesFilter: ViewStyle = {
   padding: sizes.spacing.md,
   borderBottomColor: colors.tokens.borderBase,
   borderBottomWidth: 2,
+  backgroundColor: colors.tokens.backgroundSurface200,
 }
