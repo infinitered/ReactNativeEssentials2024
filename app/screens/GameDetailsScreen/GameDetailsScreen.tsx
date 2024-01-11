@@ -10,7 +10,6 @@ import {
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
 import {Button} from '../../components/Button'
 import {Empty} from '../../components/Empty'
-import {Icon} from '../../components/Icon'
 import {Text} from '../../components/Text'
 import {type ScreenProps} from '../../navigators/AppNavigator'
 import {api} from '../../services/api'
@@ -19,6 +18,7 @@ import {Game, type Reviews} from '../../services/types'
 import {colors, sizes} from '../../theme'
 import {useNavigation} from '@react-navigation/native'
 import {Switch} from '../../components/Switch'
+import {Rating} from '../../components/Rating'
 
 interface ReviewsProps {
   gameId: number
@@ -50,7 +50,6 @@ export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
     id,
     cover,
     screenshots,
-    name,
     releaseDate,
     genres,
     involvedCompanies,
@@ -106,8 +105,7 @@ export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
           ) : (
             <View style={$image} />
           )}
-
-          <Text preset="headline1" text={name} />
+          {totalRatingStars && <Rating rating={totalRatingStars} />}
         </View>
 
         {!game ? (
@@ -138,16 +136,6 @@ export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
                   text={involvedCompanies?.map(c => c.company.name).join(', ')}
                   style={$informationValue}
                 />
-              </View>
-              <View style={[$informationRow, $ratingWrapper]}>
-                <Text preset="label2" text="Rating: " />
-                {Array.from({length: totalRatingStars ?? 0}).map((_, i) => (
-                  <Icon
-                    color={colors.tokens.borderRatingActive}
-                    key={i}
-                    name="star"
-                  />
-                ))}
               </View>
             </View>
 
@@ -217,10 +205,6 @@ const $informationRow: ViewStyle = {
 const $informationValue: TextStyle = {
   flex: 1,
   top: -2,
-}
-
-const $ratingWrapper: ViewStyle = {
-  alignItems: 'center',
 }
 
 const $descriptionWrapper: ViewStyle = {

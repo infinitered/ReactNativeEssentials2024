@@ -7,8 +7,8 @@ import {
   type ViewStyle,
 } from 'react-native'
 import {colors, sizes} from '../theme'
-import {Icon} from './Icon'
 import {Text} from './Text'
+import {Rating} from './Rating'
 
 interface CardProps {
   name: string
@@ -33,16 +33,7 @@ export const Card = (props: CardProps) => {
             <Text preset="title2" text={releaseDate} />
           </View>
 
-          <View style={$contentRow}>
-            <Text preset="label2" text="Rating:" />
-            {Array.from({length: rating}).map((_, i) => (
-              <Icon
-                color={colors.tokens.borderRatingActive}
-                key={i}
-                name="star"
-              />
-            ))}
-          </View>
+          <Rating rating={rating} />
         </View>
       </View>
     </Pressable>

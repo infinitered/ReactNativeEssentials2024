@@ -43,7 +43,7 @@ const initNavigation = safeParse(storage.getString('state'), undefined)
  */
 export type AppStackParamList = {
   GamesList: undefined
-  GameDetails: {gameId: number}
+  GameDetails: {gameId: number; name: string}
   Review: {gameId: number}
 }
 
@@ -95,7 +95,11 @@ const AppStack = () => {
         component={GamesListScreen}
         options={{title: 'Retro Games'}}
       />
-      <Stack.Screen name="GameDetails" component={GameDetailsScreen} />
+      <Stack.Screen
+        name="GameDetails"
+        component={GameDetailsScreen}
+        options={({route}) => ({title: route.params.name})}
+      />
       <Stack.Screen
         name="Review"
         component={ReviewScreen}
