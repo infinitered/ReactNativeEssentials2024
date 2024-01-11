@@ -113,4 +113,5 @@ const $favoritesFilter: ViewStyle = {
   padding: sizes.spacing.md,
   borderBottomColor: colors.tokens.borderBase,
   borderBottomWidth: 2,
+  backgroundColor: colors.tokens.backgroundSurface200,
 }
