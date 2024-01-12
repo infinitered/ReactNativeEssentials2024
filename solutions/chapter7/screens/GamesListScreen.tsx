@@ -68,8 +68,8 @@ export const GamesListScreen = () => {
       <View style={$favoritesFilter}>
         <Text preset="title1" text="Show Favorites" />
         <Switch
-          isEnabled={filterFavorites}
-          toggleSwitch={() => setFilterFavorites(!filterFavorites)}
+          on={filterFavorites}
+          onToggle={() => setFilterFavorites(!filterFavorites)}
         />
       </View>
       <SectionList
@@ -102,7 +102,7 @@ export const GamesListScreen = () => {
 }
 
 const $list: ViewStyle = {
-  backgroundColor: colors.tokens.backgroundSurface100,
+  backgroundColor: colors.background.primary,
 }
 
 const $contentContainer: ViewStyle = {
@@ -115,7 +115,7 @@ const $favoritesFilter: ViewStyle = {
   alignItems: 'center',
   justifyContent: 'space-between',
   padding: sizes.spacing.md,
-  borderBottomColor: colors.tokens.borderBase,
+  borderBottomColor: colors.border.base,
   borderBottomWidth: 2,
-  backgroundColor: colors.tokens.backgroundSurface200,
+  backgroundColor: colors.background.secondary,
 }

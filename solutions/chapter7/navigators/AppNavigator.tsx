@@ -24,7 +24,7 @@ import { GameDetailsScreen } from '../screens/GameDetailsScreen'
 import { GamesListScreen } from '../screens/GamesListScreen'
 import { ReviewScreen } from '../screens/ReviewScreen'
 
-export const storage = new MMKV({ id: '@RNEssentials/navigation/state' })
+const storage = new MMKV({ id: '@RNEssentials/navigation/state' })
 
 const initNavigation = safeParse(storage.getString('state'), undefined)
 
@@ -67,7 +67,7 @@ const renderBackButton = (navigation: NavigationHelpers<AppStackParamList>) => {
         <Icon
           name="arrow-left-circle"
           size={Platform.select({ ios: 24, android: 30 })}
-          color={colors.tokens.textBase}
+          color={colors.tint.base}
         />
       </Pressable>
     )
@@ -80,15 +80,15 @@ const AppStack = () => {
       initialRouteName="GamesList"
       screenOptions={({ navigation }) => ({
         contentStyle: {
-          borderTopColor: colors.tokens.borderBase,
+          borderTopColor: colors.border.base,
           borderTopWidth: 2,
         },
         headerLeft: () => renderBackButton(navigation),
         headerStyle: {
-          backgroundColor: colors.tokens.backgroundHeaderList,
+          backgroundColor: colors.background.brand,
         },
         headerTitleAlign: 'center',
-        headerTintColor: colors.tokens.textBase,
+        headerTintColor: colors.text.base,
         headerTitleStyle: {
           fontSize: 24,
           fontFamily: fonts.primary.semiBold,

@@ -1,27 +1,36 @@
-import { DevSettings, Platform } from 'react-native'
+import React, { PropsWithChildren, useCallback, useMemo, useState } from 'react'
+import { DevSettings, Platform, TextStyle } from 'react-native'
 import { MMKV } from 'react-native-mmkv'
 
-export const storage = new MMKV({ id: '@RNEssentials/training' })
+import { Text } from '../../solutions/chapter7/components/Text'
+import { colors, fonts } from '../theme'
+
+const storage = new MMKV({ id: '@RNEssentials/training' })
 
 export type AppModes = (typeof appModes)[number]['value']
 
 const appModes = [
   { label: 'Assignment', value: 'assignment' },
-  { label: 'Chapter 1 Solution', value: 'chapter1' },
-  { label: 'Chapter 2 Solution', value: 'chapter2' },
-  { label: 'Chapter 3 Solution', value: 'chapter3' },
-  { label: 'Chapter 4 Solution', value: 'chapter4' },
-  { label: 'Chapter 5 Solution', value: 'chapter5' },
-  { label: 'Chapter 6 Solution', value: 'chapter6' },
-  { label: 'Chapter 7 Solution', value: 'chapter7' },
+  { label: 'Chapter 1', value: 'chapter1' },
+  { label: 'Chapter 2', value: 'chapter2' },
+  { label: 'Chapter 3', value: 'chapter3' },
+  { label: 'Chapter 4', value: 'chapter4' },
+  { label: 'Chapter 5', value: 'chapter5' },
+  { label: 'Chapter 6', value: 'chapter6' },
+  { label: 'Chapter 7', value: 'chapter7' },
 ] as const
 
-export function setupAppModeSelector() {
+export function setupTrainingAppModeSelector() {
   const activeAppMode =
     (storage.getString('appMode') as AppModes) || 'assignment'
 
   appModes.forEach(f => {
-    const title = ['⚈', f.label, Platform.OS === 'android' ? false : '⚈']
+    const title = [
+      '⚈ ',
+      f.label,
+      f.value !== 'assignment' && 'Solution',
+      Platform.OS === 'android' ? false : ' ⚈',
+    ]
       .filter(Boolean)
       .join(' ')
 
@@ -32,4 +41,55 @@ export function setupAppModeSelector() {
   })
 
   return activeAppMode
+}
+
+export function TrainingBanners({
+  appMode,
+  children,
+}: PropsWithChildren<{ appMode: AppModes }>) {
+  const [bannerVisible, setBannersVisible] = useState(true)
+
+  const label = useMemo(() => {
+    const l = appModes.find(f => f.value === appMode)?.label
+
+    if (!l) return null
+
+    return Array.from({ length: 6 }, () => l).join('       ')
+  }, [appMode])
+
+  const Banner = useCallback(
+    () => (
+      <Text
+        text={label ?? ''}
+        preset="body"
+        style={$solutionLabel}
+        numberOfLines={1}
+        ellipsizeMode="clip"
+        onPress={() => setBannersVisible(false)}
+      />
+    ),
+    [label],
+  )
+
+  if (appMode === 'assignment') return children
+  if (!label) return children
+
+  return (
+    <>
+      {bannerVisible && <Banner />}
+      {children}
+      {bannerVisible && <Banner />}
+    </>
+  )
+}
+
+const $solutionLabel: TextStyle = {
+  width: '100%',
+  color: colors.text.overlay,
+  fontSize: 12,
+  lineHeight: 18,
+  height: 18,
+  fontFamily: fonts.primary.bold,
+  textAlign: 'center',
+  backgroundColor: colors.tint.accent,
 }

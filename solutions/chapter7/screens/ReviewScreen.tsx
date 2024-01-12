@@ -41,6 +41,7 @@ export const ReviewScreen = ({ navigation, route }: ScreenProps<'Review'>) => {
             multiline
             value={value}
             onChangeText={setValue}
+            placeholderTextColor={colors.text.baseMuted}
           />
         </View>
         <View style={$formActions}>
@@ -59,13 +60,16 @@ export const ReviewScreen = ({ navigation, route }: ScreenProps<'Review'>) => {
 
 const $modal: ViewStyle = {
   flex: 1,
-  backgroundColor: colors.tokens.backgroundOverlay,
+  backgroundColor: colors.manipulators.changeHexAlpha(
+    colors.background.brand,
+    75,
+  ),
 }
 
 const $container: ViewStyle = {
   padding: sizes.spacing.md,
-  backgroundColor: colors.primitives.white1000,
-  borderColor: colors.tokens.textBase,
+  backgroundColor: colors.background.primary,
+  borderColor: colors.border.base,
   borderWidth: sizes.border.sm,
   borderTopWidth: 0,
   paddingBottom: sizes.spacing.md,
@@ -79,7 +83,7 @@ const $heading: TextStyle = {
 }
 
 const $textArea: ViewStyle = {
-  borderColor: colors.tokens.textBase,
+  borderColor: colors.border.base,
   borderWidth: sizes.border.sm,
   padding: sizes.spacing.sm,
   borderRadius: sizes.spacing.md,
@@ -88,8 +92,8 @@ const $textArea: ViewStyle = {
 
 const $textInput: TextStyle = {
   fontFamily: fonts.primary.regular,
-  color: colors.tokens.textBase,
-  borderColor: colors.tokens.textBase,
+  color: colors.text.base,
+  borderColor: colors.border.base,
   height: 84,
   overflow: 'scroll',
   textAlignVertical: 'top',
@@ -102,5 +106,5 @@ const $formActions: ViewStyle = {
 }
 
 const $secondaryButton: ViewStyle = {
-  backgroundColor: colors.tokens.backgroundSurface100,
+  backgroundColor: colors.background.primary,
 }

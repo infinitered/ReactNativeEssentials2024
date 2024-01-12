@@ -17,7 +17,7 @@ import {
 } from '../../../shared/services/types'
 import { safeParse } from '../../../shared/utils/safeParse'
 
-export const storage = new MMKV({ id: '@RNEssentials/global/state' })
+const storage = new MMKV({ id: '@RNEssentials/global/state' })
 
 const initFavorites = safeParse(storage.getString('favorites'), [])
 const initReviews = safeParse(storage.getString('reviews'), {})

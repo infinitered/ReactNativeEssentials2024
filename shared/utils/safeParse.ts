@@ -1,7 +1,6 @@
 export function safeParse<T>(value: string | null | undefined, fallback: T): T {
   try {
-    // @ts-expect-error
-    return JSON.parse(value)
+    return JSON.parse(value as any)
   } catch {
     return fallback
   }

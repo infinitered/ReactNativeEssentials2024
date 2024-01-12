@@ -10,7 +10,7 @@ export interface IconProps {
 }
 
 export const Icon = (props: IconProps) => {
-  const { name, size = 24, color = colors.tokens.borderBase } = props
+  const { name, size = 24, color = colors.tint.base } = props
 
   return <FeatherIcons name={name} size={size} color={color} />
 }

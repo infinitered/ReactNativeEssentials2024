@@ -21,7 +21,7 @@ export const GamesListScreen = () => {
 
 const $screen: ViewStyle = {
   flex: 1,
-  backgroundColor: colors.tokens.backgroundSurface100,
+  backgroundColor: colors.background.primary,
   paddingHorizontal: sizes.spacing.md,
   justifyContent: 'space-between',
 }

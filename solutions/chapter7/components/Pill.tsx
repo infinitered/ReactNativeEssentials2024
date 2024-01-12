@@ -19,8 +19,8 @@ export const Pill = (props: PillProps) => {
 const $pill: ViewStyle = {
   alignItems: 'center',
   alignSelf: 'flex-start',
-  backgroundColor: colors.tokens.backgroundPillBase,
-  borderColor: colors.tokens.borderBase,
+  backgroundColor: colors.background.accent,
+  borderColor: colors.border.base,
   borderRadius: sizes.radius.md,
   borderWidth: sizes.border.sm,
   height: sizes.spacing.xl,
@@ -29,5 +29,5 @@ const $pill: ViewStyle = {
 }
 
 const $text: TextStyle = {
-  color: colors.tokens.textPillBase,
+  color: colors.text.brand,
 }

@@ -39,7 +39,7 @@ export const Text = (props: TextProps) => {
   )
 }
 
-const $base: TextStyle = { color: colors.tokens.textBase }
+const $base: TextStyle = { color: colors.text.base }
 
 const $presets = {
   display: { fontSize: 36, lineHeight: 44, fontFamily: fonts.primary.regular },

@@ -11,10 +11,13 @@ import { name as appName } from './app.json'
 import AppAssignment from './app/App'
 import { setupMockServer } from './msw'
 import { customFontsToLoad } from './shared/theme'
-import { setupAppModeSelector } from './shared/utils/trainingHelper'
+import {
+  setupTrainingAppModeSelector,
+  TrainingBanners,
+} from './shared/utils/trainingHelper'
 import AppChapter7 from './solutions/chapter7/App'
 
-const activeAppMode = setupAppModeSelector()
+const activeAppMode = setupTrainingAppModeSelector()
 
 setupMockServer()
 
@@ -48,7 +51,11 @@ function App() {
 
   if (!areFontsLoaded) return null
 
-  return <AppMode />
+  return (
+    <TrainingBanners appMode={activeAppMode}>
+      <AppMode />
+    </TrainingBanners>
+  )
 }
 
 AppRegistry.registerComponent(appName, () => App)

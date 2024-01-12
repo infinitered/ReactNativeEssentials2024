@@ -5,10 +5,10 @@
   "scripts": {
     "android": "react-native run-android",
     "clean": "./scripts/clean",
-    "generate:theme": "style-dictionary build --config ./sd.config.js",
+    "generate:tokens": "style-dictionary build --config ./sd.config.js",
     "postinstall": "./scripts/postinstall",
     "ios": "react-native run-ios",
-    "lint": "./scripts/lint-format",
+    "lint": "./scripts/tsc-lint-format",
     "setup": "./scripts/setup/index",
     "start": "react-native start",
     "test": "jest"

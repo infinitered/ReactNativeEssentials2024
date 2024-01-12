@@ -9,7 +9,7 @@ export const Empty = (props: { text?: string; icon?: IconProps['name'] }) => {
   return (
     <View style={$emptyContentWrapper}>
       <Icon
-        color={colors.tokens.textEmptyBase}
+        color={colors.tint.baseMuted}
         size={36}
         name={props.icon ?? 'frown'}
       />
@@ -28,6 +28,6 @@ const $emptyContentWrapper: ViewStyle = {
 }
 
 const $emptyText: TextStyle = {
-  color: colors.tokens.textEmptyBase,
+  color: colors.text.baseMuted,
   marginStart: sizes.spacing.md,
 }

@@ -50,10 +50,10 @@ export const GameDetailsScreen = ({ route }: ScreenProps<'GameDetails'>) => {
   const {
     id,
     cover,
-    screenshots,
     name,
     releaseDate,
     genres,
+    screenshots,
     involvedCompanies,
     totalRatingStars,
     totalRatingCount,
@@ -67,7 +67,7 @@ export const GameDetailsScreen = ({ route }: ScreenProps<'GameDetails'>) => {
       {screenshots ? (
         <Image
           blurRadius={10}
-          source={{ uri: screenshots?.[0].imageUrl }}
+          source={{ uri: screenshots[0]?.imageUrl }}
           style={$imageBackground}
         />
       ) : (
@@ -81,10 +81,10 @@ export const GameDetailsScreen = ({ route }: ScreenProps<'GameDetails'>) => {
             text="Add to Favorites"
           />
           <Switch
-            isEnabled={Boolean(
+            on={Boolean(
               favorites.find(favoriteGameId => favoriteGameId === id),
             )}
-            toggleSwitch={() => toggleFavorite(id)}
+            onToggle={() => toggleFavorite(id)}
           />
         </View>
       )}
@@ -178,7 +178,7 @@ const Reviews = ({ gameId, reviews }: ReviewsProps) => {
 
 const $scrollView: ViewStyle = {
   flex: 1,
-  backgroundColor: colors.tokens.backgroundSurface200,
+  backgroundColor: colors.background.secondary,
 }
 
 const $contentContainer: ViewStyle = {
@@ -186,7 +186,7 @@ const $contentContainer: ViewStyle = {
 }
 
 const $bodyWrapper: ViewStyle = {
-  backgroundColor: colors.tokens.backgroundSurface100,
+  backgroundColor: colors.background.primary,
   paddingHorizontal: sizes.spacing.md,
   flexGrow: 1,
 }
@@ -221,25 +221,28 @@ const $favoriteWrapper: ViewStyle = {
 }
 
 const $favoriteLabel: TextStyle = {
-  color: colors.primitives.white1000,
+  color: colors.text.overlay,
+  textShadowColor: colors.manipulators.changeHexAlpha(colors.text.base, 40),
+  textShadowOffset: { width: 0, height: 1 },
+  textShadowRadius: 1,
 }
 
 const $imageBackground: ImageStyle = {
   height: 175,
   width: '100%',
-  backgroundColor: colors.tokens.backgroundSurface200,
-  borderColor: colors.tokens.borderBase,
+  backgroundColor: colors.background.secondary,
+  borderColor: colors.border.base,
   borderBottomWidth: sizes.border.sm,
 }
 
 const $image: ImageStyle = {
-  borderColor: colors.tokens.borderBase,
+  borderColor: colors.border.base,
   borderRadius: sizes.radius.sm,
   borderWidth: sizes.border.sm,
   height: 153,
   marginEnd: sizes.spacing.md,
   width: 115,
-  backgroundColor: colors.tokens.backgroundSurface200,
+  backgroundColor: colors.background.secondary,
   position: 'absolute',
   bottom: 0,
 }
@@ -255,12 +258,12 @@ const $headerWrapper: ViewStyle = {
 const $reviewsHeaderWrapper: ViewStyle = {
   padding: sizes.spacing.md,
   rowGap: sizes.spacing.md,
-  borderColor: colors.tokens.borderBase,
+  borderColor: colors.border.base,
   borderTopWidth: sizes.border.sm,
 }
 
 const $reviewWrapper: ViewStyle = {
-  borderColor: colors.tokens.borderBase,
+  borderColor: colors.border.base,
   borderTopWidth: sizes.border.sm,
   padding: sizes.spacing.md,
 }

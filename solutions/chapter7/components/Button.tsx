@@ -48,9 +48,7 @@ export const Button = (props: ButtonProps) => {
   ]
 
   const iconColor = (state: PressableStateCallbackType) =>
-    state.pressed
-      ? colors.tokens.textButtonPressed
-      : colors.tokens.textButtonBase
+    state.pressed ? colors.text.brand : colors.text.base
 
   return (
     <Pressable {...RestPressableProps} style={$pressable}>
@@ -70,21 +68,21 @@ export const Button = (props: ButtonProps) => {
 }
 
 const $pressable: ViewStyle = {
-  height: sizes.tokens.spacingButtonHeight,
+  height: 50,
 }
 
 const $reflection: ViewStyle = {
   position: 'absolute',
   width: '100%',
   height: '100%',
-  bottom: -sizes.tokens.spacingButtonReflectionOffset,
-  right: -sizes.tokens.spacingButtonReflectionOffset,
+  bottom: -6,
+  right: -6,
   borderRadius: sizes.radius.md,
-  backgroundColor: colors.tokens.backgroundButtonReflectionBase,
+  backgroundColor: colors.background.transparent,
 }
 
 const $reflectionPressed: ViewStyle = {
-  backgroundColor: colors.tokens.backgroundButtonReflectionPressed,
+  backgroundColor: colors.background.reflection,
 }
 
 const $face: ViewStyle = {
@@ -96,19 +94,18 @@ const $face: ViewStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   columnGap: sizes.spacing.xs,
-  backgroundColor: colors.tokens.backgroundButtonBase,
-  borderColor: colors.tokens.borderButtonBase,
+  backgroundColor: colors.background.brand,
+  borderColor: colors.border.base,
 }
 
 const $facePressed: ViewStyle = {
-  backgroundColor: colors.tokens.backgroundButtonPressed,
-  borderColor: colors.tokens.borderButtonPressed,
+  backgroundColor: colors.background.accent,
 }
 
 const $text: TextStyle = {
-  color: colors.tokens.textButtonBase,
+  color: colors.text.base,
 }
 
 const $textPressed: TextStyle = {
-  color: colors.tokens.textButtonPressed,
+  color: colors.text.brand,
 }
