@@ -15,6 +15,7 @@ import { useGlobalState } from '../services/state'
 
 function useGameData() {
   const { favorites, games, setGames } = useGlobalState()
+  const [filterFavorites, setFilterFavorites] = useState(false)
 
   const getGames = useCallback(async () => {
     const response = await api.getGames()
@@ -23,8 +24,6 @@ function useGameData() {
       setGames(response.data)
     }
   }, [setGames])
-
-  const [filterFavorites, setFilterFavorites] = useState(false)
 
   useEffect(() => {
     getGames()

@@ -78,7 +78,7 @@ const $container: ViewStyle = {
 }
 
 const $heading: TextStyle = {
-  marginBottom: sizes.spacing.md,
+  marginVertical: sizes.spacing.md,
   textAlign: 'center',
 }
 

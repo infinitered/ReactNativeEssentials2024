@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e 
 
+react-native-asset
+
 bundle
 
 # Install pods

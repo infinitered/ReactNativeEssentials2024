@@ -1,10 +1,11 @@
-import FeatherIcons from '@expo/vector-icons/Feather'
 import React from 'react'
+import VectorIcon from 'react-native-vector-icons/Feather'
+import featherJson from 'react-native-vector-icons/glyphmaps/Feather.json'
 
 import { colors } from '../../../shared/theme'
 
 export interface IconProps {
-  name: keyof typeof FeatherIcons.glyphMap
+  name: keyof typeof featherJson
   size?: number
   color?: string
 }
@@ -12,5 +13,5 @@ export interface IconProps {
 export const Icon = (props: IconProps) => {
   const { name, size = 24, color = colors.tint.base } = props
 
-  return <FeatherIcons name={name} size={size} color={color} />
+  return <VectorIcon name={name} size={size} color={color} />
 }

@@ -2,7 +2,6 @@
  * @format
  */
 
-import { useFonts } from 'expo-font'
 import React, { useEffect } from 'react'
 import { AppRegistry } from 'react-native'
 import BootSplash from 'react-native-bootsplash'
@@ -10,10 +9,9 @@ import BootSplash from 'react-native-bootsplash'
 import { name as appName } from './app.json'
 import AppAssignment from './app/App'
 import { setupMockServer } from './msw'
-import { customFontsToLoad } from './shared/theme'
 import {
   setupTrainingAppModeSelector,
-  TrainingBanners,
+  TrainingBanner,
 } from './shared/utils/trainingHelper'
 import AppChapter7 from './solutions/chapter7/App'
 
@@ -41,20 +39,17 @@ const appFileRegistry = {
 const AppMode = appFileRegistry[activeAppMode]
 
 function App() {
-  const [areFontsLoaded] = useFonts(customFontsToLoad)
-
   useEffect(() => {
     setTimeout(() => {
       BootSplash.hide({ fade: true })
     }, 500)
-  }, [areFontsLoaded])
-
-  if (!areFontsLoaded) return null
+  }, [])
 
   return (
-    <TrainingBanners appMode={activeAppMode}>
+    <>
       <AppMode />
-    </TrainingBanners>
+      <TrainingBanner appMode={activeAppMode} />
+    </>
   )
 }
 

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useCallback, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { DevSettings, Platform, TextStyle } from 'react-native'
 import { MMKV } from 'react-native-mmkv'
 
@@ -43,10 +43,7 @@ export function setupTrainingAppModeSelector() {
   return activeAppMode
 }
 
-export function TrainingBanners({
-  appMode,
-  children,
-}: PropsWithChildren<{ appMode: AppModes }>) {
+export function TrainingBanner({ appMode }: { appMode: AppModes }) {
   const [bannerVisible, setBannersVisible] = useState(true)
 
   const label = useMemo(() => {
@@ -57,29 +54,19 @@ export function TrainingBanners({
     return Array.from({ length: 6 }, () => l).join('       ')
   }, [appMode])
 
-  const Banner = useCallback(
-    () => (
-      <Text
-        text={label ?? ''}
-        preset="body"
-        style={$solutionLabel}
-        numberOfLines={1}
-        ellipsizeMode="clip"
-        onPress={() => setBannersVisible(false)}
-      />
-    ),
-    [label],
-  )
-
-  if (appMode === 'assignment') return children
-  if (!label) return children
+  if (appMode === 'assignment') return null
+  if (!bannerVisible) return null
+  if (!label) return null
 
   return (
-    <>
-      {bannerVisible && <Banner />}
-      {children}
-      {bannerVisible && <Banner />}
-    </>
+    <Text
+      text={label ?? ''}
+      preset="body"
+      style={$solutionLabel}
+      numberOfLines={1}
+      ellipsizeMode="clip"
+      onPress={() => setBannersVisible(false)}
+    />
   )
 }
 
