@@ -1,6 +1,7 @@
 import React from 'react'
 import {TextStyle, View, ViewStyle} from 'react-native'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
+
 import {colors, sizes} from '../../shared/theme'
 import {Text} from '../components/Text'
 

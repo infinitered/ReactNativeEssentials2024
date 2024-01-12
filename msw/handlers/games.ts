@@ -1,4 +1,5 @@
 import {rest} from 'msw'
+
 import {PostGamesParams} from '../../shared/services/types'
 import {gameData, sliceGames, sortGames} from '../utils/prepareGameData'
 

@@ -1,11 +1,12 @@
 import React from 'react'
 import {
   Image,
+  type ImageStyle,
   Pressable,
   View,
-  type ImageStyle,
   type ViewStyle,
 } from 'react-native'
+
 import {colors, sizes} from '../../../shared/theme'
 import {Rating} from './Rating'
 import {Text} from './Text'

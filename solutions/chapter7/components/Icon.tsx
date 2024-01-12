@@ -1,5 +1,6 @@
 import FeatherIcons from '@expo/vector-icons/Feather'
 import React from 'react'
+
 import {colors} from '../../../shared/theme'
 
 export interface IconProps {

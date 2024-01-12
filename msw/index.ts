@@ -1,7 +1,9 @@
 import 'react-native-url-polyfill/auto'
+
 import {setupServer} from 'msw/native'
-import {games} from './handlers/games'
+
 import {game} from './handlers/game'
+import {games} from './handlers/games'
 
 /**
  * JSON mocks can be updated from IR's postman collection:

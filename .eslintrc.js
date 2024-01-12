@@ -10,8 +10,10 @@ module.exports = {
     sourceType: 'module',
     project: ['./tsconfig.json'],
   },
-  plugins: [],
+  plugins: ['simple-import-sort'],
   rules: {
-    'prettier/prettier': ['error'],
+    'prettier/prettier': 'error',
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
   },
 }

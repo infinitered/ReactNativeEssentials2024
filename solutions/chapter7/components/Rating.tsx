@@ -1,8 +1,9 @@
 import React from 'react'
 import {TextStyle, View, ViewStyle} from 'react-native'
+
+import {colors, sizes} from '../../../shared/theme'
 import {Icon} from './Icon'
 import {Text} from './Text'
-import {colors, sizes} from '../../../shared/theme'
 
 interface RatingProps {
   rating: number

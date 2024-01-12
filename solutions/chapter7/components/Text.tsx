@@ -1,10 +1,11 @@
 import React from 'react'
 import {
-  Text as RNText,
   StyleProp,
-  TextStyle,
+  Text as RNText,
   type TextProps as RNTextProps,
+  TextStyle,
 } from 'react-native'
+
 import {colors, fonts} from '../../../shared/theme'
 
 interface TextProps extends RNTextProps {

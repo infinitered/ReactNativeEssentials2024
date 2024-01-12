@@ -1,8 +1,9 @@
 import React from 'react'
 import {
-  SafeAreaProvider,
   initialWindowMetrics,
+  SafeAreaProvider,
 } from 'react-native-safe-area-context'
+
 import {GamesListScreen} from './screens/GamesListScreen'
 
 const App = (): React.JSX.Element | null => {

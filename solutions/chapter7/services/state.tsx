@@ -1,12 +1,12 @@
 import React, {
-  PropsWithChildren,
   createContext,
+  PropsWithChildren,
   useCallback,
   useContext,
   useState,
 } from 'react'
 import {MMKV} from 'react-native-mmkv'
-import {safeParse} from '../../../shared/utils/safeParse'
+
 import {
   type AppendReview,
   type Favorites,
@@ -15,6 +15,7 @@ import {
   type Reviews,
   type ToggleFavorite,
 } from '../../../shared/services/types'
+import {safeParse} from '../../../shared/utils/safeParse'
 
 export const storage = new MMKV({id: '@RNEssentials/global/state'})
 

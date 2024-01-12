@@ -2,15 +2,16 @@ import {useNavigation} from '@react-navigation/native'
 import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import {SectionList, View, ViewStyle} from 'react-native'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
+
+import {api} from '../../../shared/services/api'
+import {Game} from '../../../shared/services/types'
+import {colors, sizes} from '../../../shared/theme'
 import {Card} from '../components/Card'
 import {Empty} from '../components/Empty'
 import {Pill} from '../components/Pill'
-import {api} from '../../../shared/services/api'
-import {useGlobalState} from '../services/state'
-import {Game} from '../../../shared/services/types'
-import {colors, sizes} from '../../../shared/theme'
-import {Text} from '../components/Text'
 import {Switch} from '../components/Switch'
+import {Text} from '../components/Text'
+import {useGlobalState} from '../services/state'
 
 function useGameData() {
   const {favorites, games, setGames} = useGlobalState()

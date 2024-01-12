@@ -1,6 +1,7 @@
 import {rest} from 'msw'
-import {findGameById} from '../utils/prepareGameData'
+
 import {delay} from '../utils/delay'
+import {findGameById} from '../utils/prepareGameData'
 
 export const game = rest.post(
   'https://api.retrogames.dev/games/:gameId',

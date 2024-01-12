@@ -2,13 +2,14 @@ import {useNavigation} from '@react-navigation/native'
 import React, {useCallback, useEffect, useState} from 'react'
 import {
   Image,
-  ScrollView,
-  View,
   type ImageStyle,
+  ScrollView,
   type TextStyle,
+  View,
   type ViewStyle,
 } from 'react-native'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
+
 import {api} from '../../../shared/services/api'
 import {Game, type Reviews} from '../../../shared/services/types'
 import {colors, sizes} from '../../../shared/theme'

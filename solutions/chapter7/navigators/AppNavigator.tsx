@@ -5,18 +5,19 @@ import {
   NavigationHelpers,
 } from '@react-navigation/native'
 import {
-  NativeStackScreenProps,
   createNativeStackNavigator,
+  NativeStackScreenProps,
 } from '@react-navigation/native-stack'
 import React from 'react'
 import {Platform, Pressable, useColorScheme, type ViewStyle} from 'react-native'
+import {MMKV} from 'react-native-mmkv'
+
+import {colors, fonts, sizes} from '../../../shared/theme'
+import {safeParse} from '../../../shared/utils/safeParse'
+import {Icon} from '../components/Icon'
 import {GameDetailsScreen} from '../screens/GameDetailsScreen'
 import {GamesListScreen} from '../screens/GamesListScreen'
 import {ReviewScreen} from '../screens/ReviewScreen'
-import {MMKV} from 'react-native-mmkv'
-import {safeParse} from '../../../shared/utils/safeParse'
-import {colors, fonts, sizes} from '../../../shared/theme'
-import {Icon} from '../components/Icon'
 
 export const storage = new MMKV({id: '@RNEssentials/navigation/state'})
 

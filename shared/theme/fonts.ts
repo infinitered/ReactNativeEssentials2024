@@ -1,7 +1,7 @@
 import {
   Oxanium_400Regular,
-  Oxanium_600SemiBold,
   Oxanium_500Medium,
+  Oxanium_600SemiBold,
   Oxanium_700Bold,
 } from '@expo-google-fonts/oxanium'
 

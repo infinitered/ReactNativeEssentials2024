@@ -2,17 +2,17 @@
  * @format
  */
 
+import {useFonts} from 'expo-font'
+import React, {useEffect} from 'react'
 import {AppRegistry} from 'react-native'
+import BootSplash from 'react-native-bootsplash'
+
 import {name as appName} from './app.json'
 import AppAssignment from './app/App'
 import {setupMockServer} from './msw'
+import {customFontsToLoad} from './shared/theme'
 import {setupAppModeSelector} from './shared/utils/trainingHelper'
 import AppChapter7 from './solutions/chapter7/App'
-
-import {useFonts} from 'expo-font'
-import React, {useEffect} from 'react'
-import BootSplash from 'react-native-bootsplash'
-import {customFontsToLoad} from './shared/theme'
 
 const activeAppMode = setupAppModeSelector()
 
