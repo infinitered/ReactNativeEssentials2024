@@ -1,7 +1,7 @@
-import {rest} from 'msw'
+import { rest } from 'msw'
 
-import {PostGamesParams} from '../../shared/services/types'
-import {gameData, sliceGames, sortGames} from '../utils/prepareGameData'
+import { PostGamesParams } from '../../shared/services/types'
+import { gameData, sliceGames, sortGames } from '../utils/prepareGameData'
 
 export const games = rest.post(
   'https://api.retrogames.dev/games',

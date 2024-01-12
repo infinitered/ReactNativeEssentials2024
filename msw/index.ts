@@ -1,9 +1,9 @@
 import 'react-native-url-polyfill/auto'
 
-import {setupServer} from 'msw/native'
+import { setupServer } from 'msw/native'
 
-import {game} from './handlers/game'
-import {games} from './handlers/games'
+import { game } from './handlers/game'
+import { games } from './handlers/games'
 
 /**
  * JSON mocks can be updated from IR's postman collection:
@@ -12,7 +12,7 @@ import {games} from './handlers/games'
 
 const server = setupServer(games, game)
 
-export function setupMockServer(opts: {debug?: boolean} = {}) {
+export function setupMockServer(opts: { debug?: boolean } = {}) {
   try {
     if (opts.debug) {
       server.events.on('request:start', req => {

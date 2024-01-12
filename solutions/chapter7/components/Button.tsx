@@ -9,9 +9,9 @@ import {
   ViewStyle,
 } from 'react-native'
 
-import {colors, sizes} from '../../../shared/theme'
-import {Icon, IconProps} from './Icon'
-import {Text} from './Text'
+import { colors, sizes } from '../../../shared/theme'
+import { Icon, IconProps } from './Icon'
+import { Text } from './Text'
 
 interface ButtonProps extends Omit<PressableProps, 'children'> {
   /**
@@ -29,7 +29,7 @@ interface ButtonProps extends Omit<PressableProps, 'children'> {
 }
 
 export const Button = (props: ButtonProps) => {
-  const {text, icon, style: $faceOverride, ...RestPressableProps} = props
+  const { text, icon, style: $faceOverride, ...RestPressableProps } = props
 
   const $reflectionStyle: PressableProps['style'] = state => [
     $reflection,

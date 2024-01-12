@@ -5,7 +5,7 @@ import React, {
   useContext,
   useState,
 } from 'react'
-import {MMKV} from 'react-native-mmkv'
+import { MMKV } from 'react-native-mmkv'
 
 import {
   type AppendReview,
@@ -15,9 +15,9 @@ import {
   type Reviews,
   type ToggleFavorite,
 } from '../../../shared/services/types'
-import {safeParse} from '../../../shared/utils/safeParse'
+import { safeParse } from '../../../shared/utils/safeParse'
 
-export const storage = new MMKV({id: '@RNEssentials/global/state'})
+export const storage = new MMKV({ id: '@RNEssentials/global/state' })
 
 const initFavorites = safeParse(storage.getString('favorites'), [])
 const initReviews = safeParse(storage.getString('reviews'), {})
@@ -31,7 +31,7 @@ export const GlobalStateContext = createContext<GlobalStateContextData>({
   appendReview: (_gameId: Game['id'], _review: string) => undefined,
 })
 
-export const GlobalStateProvider = ({children}: PropsWithChildren) => {
+export const GlobalStateProvider = ({ children }: PropsWithChildren) => {
   const [games, setGames] = useState<Array<Game>>([])
   const [favorites, setFavorites] = useState<Favorites>(initFavorites)
   const [reviews, setReviews] = useState<Reviews>(initReviews)

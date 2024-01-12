@@ -1,20 +1,20 @@
-import {useNavigation} from '@react-navigation/native'
-import React, {useCallback, useEffect, useMemo, useState} from 'react'
-import {SectionList, View, ViewStyle} from 'react-native'
-import {useSafeAreaInsets} from 'react-native-safe-area-context'
+import { useNavigation } from '@react-navigation/native'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { SectionList, View, ViewStyle } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import {api} from '../../../shared/services/api'
-import {Game} from '../../../shared/services/types'
-import {colors, sizes} from '../../../shared/theme'
-import {Card} from '../components/Card'
-import {Empty} from '../components/Empty'
-import {Pill} from '../components/Pill'
-import {Switch} from '../components/Switch'
-import {Text} from '../components/Text'
-import {useGlobalState} from '../services/state'
+import { api } from '../../../shared/services/api'
+import { Game } from '../../../shared/services/types'
+import { colors, sizes } from '../../../shared/theme'
+import { Card } from '../components/Card'
+import { Empty } from '../components/Empty'
+import { Pill } from '../components/Pill'
+import { Switch } from '../components/Switch'
+import { Text } from '../components/Text'
+import { useGlobalState } from '../services/state'
 
 function useGameData() {
-  const {favorites, games, setGames} = useGlobalState()
+  const { favorites, games, setGames } = useGlobalState()
 
   const getGames = useCallback(async () => {
     const response = await api.getGames()
@@ -31,7 +31,7 @@ function useGameData() {
   }, [getGames])
 
   const gamesSectionList = useMemo(() => {
-    const initialValue: {[k: number]: Game[]} = {}
+    const initialValue: { [k: number]: Game[] } = {}
     const gameListMap = games.reduce((acc, curr) => {
       if (filterFavorites && !favorites.includes(curr.id)) return acc
 
@@ -51,11 +51,11 @@ function useGameData() {
     }))
   }, [games, favorites, filterFavorites])
 
-  return {gamesSectionList, filterFavorites, setFilterFavorites}
+  return { gamesSectionList, filterFavorites, setFilterFavorites }
 }
 
 export const GamesListScreen = () => {
-  const {bottom: paddingBottom} = useSafeAreaInsets()
+  const { bottom: paddingBottom } = useSafeAreaInsets()
   const navigation = useNavigation()
   const {
     gamesSectionList: games,
@@ -76,12 +76,12 @@ export const GamesListScreen = () => {
         sections={games}
         style={$list}
         keyExtractor={item => String(item.id)}
-        contentContainerStyle={[{paddingBottom}, $contentContainer]}
+        contentContainerStyle={[{ paddingBottom }, $contentContainer]}
         ListEmptyComponent={<Empty />}
         initialNumToRender={6}
         maxToRenderPerBatch={20}
         windowSize={31}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <Card
             onPress={() => {
               navigation.navigate('GameDetails', {
@@ -95,7 +95,7 @@ export const GamesListScreen = () => {
             imageUrl={item.cover.imageUrl}
           />
         )}
-        renderSectionHeader={({section: {year}}) => <Pill text={year} />}
+        renderSectionHeader={({ section: { year } }) => <Pill text={year} />}
       />
     </>
   )

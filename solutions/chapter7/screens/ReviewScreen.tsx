@@ -1,19 +1,19 @@
-import React, {useCallback, useState} from 'react'
-import {TextInput, TextStyle, View, ViewStyle} from 'react-native'
-import {useSafeAreaInsets} from 'react-native-safe-area-context'
+import React, { useCallback, useState } from 'react'
+import { TextInput, TextStyle, View, ViewStyle } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import {colors, fonts, sizes} from '../../../shared/theme'
-import {Button} from '../components/Button'
-import {Text} from '../components/Text'
-import {ScreenProps} from '../navigators/AppNavigator'
-import {useGlobalState} from '../services/state'
+import { colors, fonts, sizes } from '../../../shared/theme'
+import { Button } from '../components/Button'
+import { Text } from '../components/Text'
+import { ScreenProps } from '../navigators/AppNavigator'
+import { useGlobalState } from '../services/state'
 
-export const ReviewScreen = ({navigation, route}: ScreenProps<'Review'>) => {
-  const {top: paddingTop} = useSafeAreaInsets()
+export const ReviewScreen = ({ navigation, route }: ScreenProps<'Review'>) => {
+  const { top: paddingTop } = useSafeAreaInsets()
   const [value, setValue] = useState('')
 
   const state = useGlobalState()
-  const {gameId} = route.params
+  const { gameId } = route.params
 
   const backToPrevious = useCallback(() => {
     if (navigation.canGoBack()) {
@@ -32,7 +32,7 @@ export const ReviewScreen = ({navigation, route}: ScreenProps<'Review'>) => {
 
   return (
     <View style={$modal}>
-      <View style={[$container, {paddingTop}]}>
+      <View style={[$container, { paddingTop }]}>
         <Text style={$heading} preset="headline2" text="Write a Review" />
         <View style={$textArea}>
           <TextInput

@@ -19,5 +19,5 @@ const sizes = {
   tokens: sizeTokens,
 }
 
-export {colors, sizes}
+export { colors, sizes }
 export * from './fonts'

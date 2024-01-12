@@ -1,16 +1,16 @@
 import React from 'react'
-import {TextStyle, View, ViewStyle} from 'react-native'
+import { TextStyle, View, ViewStyle } from 'react-native'
 
-import {colors, sizes} from '../../../shared/theme'
-import {Icon} from './Icon'
-import {Text} from './Text'
+import { colors, sizes } from '../../../shared/theme'
+import { Icon } from './Icon'
+import { Text } from './Text'
 
 interface RatingProps {
   rating: number
   ratingsCount?: number
 }
 
-export const Rating = ({rating, ratingsCount}: RatingProps) => {
+export const Rating = ({ rating, ratingsCount }: RatingProps) => {
   const label = [
     'Rating',
     ratingsCount !== undefined && `(${ratingsCount} ratings)`,
@@ -21,7 +21,7 @@ export const Rating = ({rating, ratingsCount}: RatingProps) => {
   return (
     <View style={$container}>
       <Text style={$label} preset="label2" text={`${label}:`} />
-      {Array.from({length: rating}).map((_, i) => (
+      {Array.from({ length: rating }).map((_, i) => (
         <Icon color={colors.tokens.borderRatingActive} key={i} name="star" />
       ))}
     </View>

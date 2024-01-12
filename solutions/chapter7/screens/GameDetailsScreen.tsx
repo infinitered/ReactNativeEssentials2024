@@ -1,5 +1,5 @@
-import {useNavigation} from '@react-navigation/native'
-import React, {useCallback, useEffect, useState} from 'react'
+import { useNavigation } from '@react-navigation/native'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
   Image,
   type ImageStyle,
@@ -8,31 +8,31 @@ import {
   View,
   type ViewStyle,
 } from 'react-native'
-import {useSafeAreaInsets} from 'react-native-safe-area-context'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import {api} from '../../../shared/services/api'
-import {Game, type Reviews} from '../../../shared/services/types'
-import {colors, sizes} from '../../../shared/theme'
-import {Button} from '../components/Button'
-import {Empty} from '../components/Empty'
-import {Rating} from '../components/Rating'
-import {Switch} from '../components/Switch'
-import {Text} from '../components/Text'
-import {type ScreenProps} from '../navigators/AppNavigator'
-import {useGlobalState} from '../services/state'
+import { api } from '../../../shared/services/api'
+import { Game, type Reviews } from '../../../shared/services/types'
+import { colors, sizes } from '../../../shared/theme'
+import { Button } from '../components/Button'
+import { Empty } from '../components/Empty'
+import { Rating } from '../components/Rating'
+import { Switch } from '../components/Switch'
+import { Text } from '../components/Text'
+import { type ScreenProps } from '../navigators/AppNavigator'
+import { useGlobalState } from '../services/state'
 
 interface ReviewsProps {
   gameId: number
   reviews: Reviews[keyof Reviews]
 }
 
-export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
-  const {bottom: paddingBottom} = useSafeAreaInsets()
+export const GameDetailsScreen = ({ route }: ScreenProps<'GameDetails'>) => {
+  const { bottom: paddingBottom } = useSafeAreaInsets()
   const gameId = route.params.gameId
   const state = useGlobalState()
   const reviews = gameId ? state.reviews[gameId] ?? [] : []
 
-  const {favorites, toggleFavorite} = useGlobalState()
+  const { favorites, toggleFavorite } = useGlobalState()
   const [game, setGame] = useState<Game | undefined>()
 
   const getGame = useCallback(async () => {
@@ -63,11 +63,11 @@ export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
   return (
     <ScrollView
       style={$scrollView}
-      contentContainerStyle={[$contentContainer, {paddingBottom}]}>
+      contentContainerStyle={[$contentContainer, { paddingBottom }]}>
       {screenshots ? (
         <Image
           blurRadius={10}
-          source={{uri: screenshots?.[0].imageUrl}}
+          source={{ uri: screenshots?.[0].imageUrl }}
           style={$imageBackground}
         />
       ) : (
@@ -93,7 +93,7 @@ export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
           {cover ? (
             <Image
               resizeMode="cover"
-              source={{uri: cover?.imageUrl}}
+              source={{ uri: cover?.imageUrl }}
               style={$image}
             />
           ) : (
@@ -152,7 +152,7 @@ export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
   )
 }
 
-const Reviews = ({gameId, reviews}: ReviewsProps) => {
+const Reviews = ({ gameId, reviews }: ReviewsProps) => {
   const navigation = useNavigation()
 
   return (
@@ -163,7 +163,7 @@ const Reviews = ({gameId, reviews}: ReviewsProps) => {
         </Text>
         <Button
           text="Write A Review"
-          onPress={() => navigation.navigate('Review', {gameId})}
+          onPress={() => navigation.navigate('Review', { gameId })}
         />
       </View>
 

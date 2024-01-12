@@ -1,15 +1,15 @@
 import React from 'react'
-import {TextStyle, View, ViewStyle} from 'react-native'
-import {useSafeAreaInsets} from 'react-native-safe-area-context'
+import { TextStyle, View, ViewStyle } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import {colors, sizes} from '../../shared/theme'
-import {Text} from '../components/Text'
+import { colors, sizes } from '../../shared/theme'
+import { Text } from '../components/Text'
 
 export const GamesListScreen = () => {
-  const {bottom: paddingBottom, top: paddingTop} = useSafeAreaInsets()
+  const { bottom: paddingBottom, top: paddingTop } = useSafeAreaInsets()
 
   return (
-    <View style={[$screen, {paddingBottom, paddingTop}]}>
+    <View style={[$screen, { paddingBottom, paddingTop }]}>
       <View style={$welcomeContainer}>
         <Text style={$welcomeSmall}>Welcome To:</Text>
         <Text style={$welcomeLarge}>React Native{`\n`}Essentials!</Text>

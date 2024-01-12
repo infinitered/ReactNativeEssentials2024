@@ -7,9 +7,9 @@ import {
   type ViewStyle,
 } from 'react-native'
 
-import {colors, sizes} from '../../../shared/theme'
-import {Rating} from './Rating'
-import {Text} from './Text'
+import { colors, sizes } from '../../../shared/theme'
+import { Rating } from './Rating'
+import { Text } from './Text'
 
 interface CardProps {
   name: string
@@ -20,12 +20,12 @@ interface CardProps {
 }
 
 export const Card = (props: CardProps) => {
-  const {name, imageUrl, releaseDate, rating = 0, onPress} = props
+  const { name, imageUrl, releaseDate, rating = 0, onPress } = props
   return (
     <Pressable onPress={onPress}>
       <View style={$reflection} />
       <View style={$card}>
-        <Image source={{uri: imageUrl}} style={$image} />
+        <Image source={{ uri: imageUrl }} style={$image} />
         <View style={$contentWrapper}>
           <Text numberOfLines={1} preset="headline2" text={name} />
 

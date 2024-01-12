@@ -1,11 +1,11 @@
 import React from 'react'
-import {TextStyle, View, ViewStyle} from 'react-native'
+import { TextStyle, View, ViewStyle } from 'react-native'
 
-import {colors, sizes} from '../../../shared/theme'
-import {Icon, IconProps} from './Icon'
-import {Text} from './Text'
+import { colors, sizes } from '../../../shared/theme'
+import { Icon, IconProps } from './Icon'
+import { Text } from './Text'
 
-export const Empty = (props: {text?: string; icon?: IconProps['name']}) => {
+export const Empty = (props: { text?: string; icon?: IconProps['name'] }) => {
   return (
     <View style={$emptyContentWrapper}>
       <Icon

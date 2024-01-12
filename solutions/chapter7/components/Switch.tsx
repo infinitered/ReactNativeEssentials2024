@@ -1,7 +1,7 @@
 import React from 'react'
-import {Switch as RNSwitch, View, ViewStyle} from 'react-native'
+import { Switch as RNSwitch, View, ViewStyle } from 'react-native'
 
-import {colors} from '../../../shared/theme'
+import { colors } from '../../../shared/theme'
 
 interface SwitchProps {
   isEnabled: boolean
@@ -9,7 +9,7 @@ interface SwitchProps {
 }
 
 export const Switch = (props: SwitchProps) => {
-  const {isEnabled, toggleSwitch} = props
+  const { isEnabled, toggleSwitch } = props
   return (
     <View style={$container}>
       <RNSwitch

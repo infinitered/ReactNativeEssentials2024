@@ -4,7 +4,7 @@ import {
   SafeAreaProvider,
 } from 'react-native-safe-area-context'
 
-import {GamesListScreen} from './screens/GamesListScreen'
+import { GamesListScreen } from './screens/GamesListScreen'
 
 const App = (): React.JSX.Element | null => {
   return (

@@ -9,17 +9,22 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack'
 import React from 'react'
-import {Platform, Pressable, useColorScheme, type ViewStyle} from 'react-native'
-import {MMKV} from 'react-native-mmkv'
+import {
+  Platform,
+  Pressable,
+  useColorScheme,
+  type ViewStyle,
+} from 'react-native'
+import { MMKV } from 'react-native-mmkv'
 
-import {colors, fonts, sizes} from '../../../shared/theme'
-import {safeParse} from '../../../shared/utils/safeParse'
-import {Icon} from '../components/Icon'
-import {GameDetailsScreen} from '../screens/GameDetailsScreen'
-import {GamesListScreen} from '../screens/GamesListScreen'
-import {ReviewScreen} from '../screens/ReviewScreen'
+import { colors, fonts, sizes } from '../../../shared/theme'
+import { safeParse } from '../../../shared/utils/safeParse'
+import { Icon } from '../components/Icon'
+import { GameDetailsScreen } from '../screens/GameDetailsScreen'
+import { GamesListScreen } from '../screens/GamesListScreen'
+import { ReviewScreen } from '../screens/ReviewScreen'
 
-export const storage = new MMKV({id: '@RNEssentials/navigation/state'})
+export const storage = new MMKV({ id: '@RNEssentials/navigation/state' })
 
 const initNavigation = safeParse(storage.getString('state'), undefined)
 
@@ -36,8 +41,8 @@ const initNavigation = safeParse(storage.getString('state'), undefined)
  */
 export type AppStackParamList = {
   GamesList: undefined
-  GameDetails: {gameId: number; name: string}
-  Review: {gameId: number}
+  GameDetails: { gameId: number; name: string }
+  Review: { gameId: number }
 }
 
 export type ScreenProps<T extends keyof AppStackParamList> =
@@ -61,7 +66,7 @@ const renderBackButton = (navigation: NavigationHelpers<AppStackParamList>) => {
       <Pressable style={$backButton} onPress={() => navigation.goBack()}>
         <Icon
           name="arrow-left-circle"
-          size={Platform.select({ios: 24, android: 30})}
+          size={Platform.select({ ios: 24, android: 30 })}
           color={colors.tokens.textBase}
         />
       </Pressable>
@@ -73,7 +78,7 @@ const AppStack = () => {
   return (
     <Stack.Navigator
       initialRouteName="GamesList"
-      screenOptions={({navigation}) => ({
+      screenOptions={({ navigation }) => ({
         contentStyle: {
           borderTopColor: colors.tokens.borderBase,
           borderTopWidth: 2,
@@ -92,12 +97,12 @@ const AppStack = () => {
       <Stack.Screen
         name="GamesList"
         component={GamesListScreen}
-        options={{title: 'Retro Games'}}
+        options={{ title: 'Retro Games' }}
       />
       <Stack.Screen
         name="GameDetails"
         component={GameDetailsScreen}
-        options={({route}) => ({title: route.params.name})}
+        options={({ route }) => ({ title: route.params.name })}
       />
       <Stack.Screen
         name="Review"
