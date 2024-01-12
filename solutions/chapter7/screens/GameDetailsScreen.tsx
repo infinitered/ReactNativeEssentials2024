@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native'
 import React, {useCallback, useEffect, useState} from 'react'
 import {
   Image,
@@ -8,17 +9,16 @@ import {
   type ViewStyle,
 } from 'react-native'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
-import {Button} from '../../components/Button'
-import {Empty} from '../../components/Empty'
-import {Text} from '../../components/Text'
-import {type ScreenProps} from '../../navigators/AppNavigator'
-import {api} from '../../services/api'
-import {useGlobalState} from '../../services/state'
-import {Game, type Reviews} from '../../services/types'
-import {colors, sizes} from '../../theme'
-import {useNavigation} from '@react-navigation/native'
-import {Switch} from '../../components/Switch'
-import {Rating} from '../../components/Rating'
+import {api} from '../../../shared/services/api'
+import {Game, type Reviews} from '../../../shared/services/types'
+import {colors, sizes} from '../../../shared/theme'
+import {Button} from '../components/Button'
+import {Empty} from '../components/Empty'
+import {Rating} from '../components/Rating'
+import {Switch} from '../components/Switch'
+import {Text} from '../components/Text'
+import {type ScreenProps} from '../navigators/AppNavigator'
+import {useGlobalState} from '../services/state'
 
 interface ReviewsProps {
   gameId: number
@@ -50,26 +50,19 @@ export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
     id,
     cover,
     screenshots,
+    name,
     releaseDate,
     genres,
     involvedCompanies,
     totalRatingStars,
+    totalRatingCount,
     summary,
   } = game ?? {}
 
   return (
     <ScrollView
-      style={[
-        $scrollView,
-        {paddingBottom},
-        {
-          backgroundColor:
-            reviews.length > 0
-              ? colors.tokens.backgroundSurface200
-              : colors.tokens.backgroundSurface100,
-        },
-      ]}
-      contentContainerStyle={$contentContainer}>
+      style={$scrollView}
+      contentContainerStyle={[$contentContainer, {paddingBottom}]}>
       {screenshots ? (
         <Image
           blurRadius={10}
@@ -79,7 +72,7 @@ export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
       ) : (
         <View style={$imageBackground} />
       )}
-      {id ? (
+      {!!id && (
         <View style={$favoriteWrapper}>
           <Text
             style={$favoriteLabel}
@@ -93,7 +86,7 @@ export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
             toggleSwitch={() => toggleFavorite(id)}
           />
         </View>
-      ) : null}
+      )}
       <View style={$bodyWrapper}>
         <View style={$headerWrapper}>
           {cover ? (
@@ -105,7 +98,8 @@ export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
           ) : (
             <View style={$image} />
           )}
-          {totalRatingStars && <Rating rating={totalRatingStars} />}
+
+          <Text preset="headline1" text={name} />
         </View>
 
         {!game ? (
@@ -137,6 +131,12 @@ export const GameDetailsScreen = ({route}: ScreenProps<'GameDetails'>) => {
                   style={$informationValue}
                 />
               </View>
+              {!!totalRatingStars && (
+                <Rating
+                  ratingsCount={totalRatingCount}
+                  rating={totalRatingStars}
+                />
+              )}
             </View>
 
             <View style={$descriptionWrapper}>
@@ -166,27 +166,26 @@ const Reviews = ({gameId, reviews}: ReviewsProps) => {
         />
       </View>
 
-      <View>
-        {reviews.map((review, index) => (
-          <View key={index} style={$reviewWrapper}>
-            <Text text={review} />
-          </View>
-        ))}
-      </View>
+      {reviews.map((review, index) => (
+        <View key={index} style={$reviewWrapper}>
+          <Text text={review} />
+        </View>
+      ))}
     </>
   )
 }
 
 const $scrollView: ViewStyle = {
   flex: 1,
+  backgroundColor: colors.tokens.backgroundSurface200,
 }
 
 const $contentContainer: ViewStyle = {
   flexGrow: 1,
-  backgroundColor: colors.tokens.backgroundSurface100,
 }
 
 const $bodyWrapper: ViewStyle = {
+  backgroundColor: colors.tokens.backgroundSurface100,
   paddingHorizontal: sizes.spacing.md,
   flexGrow: 1,
 }
@@ -227,7 +226,7 @@ const $favoriteLabel: TextStyle = {
 const $imageBackground: ImageStyle = {
   height: 175,
   width: '100%',
-  backgroundColor: colors.primitives.purpleMuted400,
+  backgroundColor: colors.tokens.backgroundSurface200,
   borderColor: colors.tokens.borderBase,
   borderBottomWidth: sizes.border.sm,
 }
@@ -241,23 +240,26 @@ const $image: ImageStyle = {
   width: 115,
   backgroundColor: colors.tokens.backgroundSurface200,
   position: 'absolute',
+  bottom: 0,
 }
 
 const $headerWrapper: ViewStyle = {
-  alignItems: 'flex-end',
+  alignItems: 'center',
   flexDirection: 'row',
   paddingVertical: sizes.spacing.md,
   paddingLeft: ($image.width as number) + sizes.spacing.md,
+  minHeight: 104,
 }
 
 const $reviewsHeaderWrapper: ViewStyle = {
   padding: sizes.spacing.md,
   rowGap: sizes.spacing.md,
+  borderColor: colors.tokens.borderBase,
+  borderTopWidth: sizes.border.sm,
 }
 
 const $reviewWrapper: ViewStyle = {
   borderColor: colors.tokens.borderBase,
   borderTopWidth: sizes.border.sm,
   padding: sizes.spacing.md,
-  backgroundColor: colors.tokens.backgroundSurface200,
 }

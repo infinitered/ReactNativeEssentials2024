@@ -1,10 +1,10 @@
 import React, {useCallback, useState} from 'react'
-import {Text} from '../../components/Text'
+import {Text} from '../components/Text'
 import {TextInput, TextStyle, View, ViewStyle} from 'react-native'
-import {Button} from '../../components/Button'
-import {colors, fonts, sizes} from '../../theme'
-import {useGlobalState} from '../../services/state'
-import {ScreenProps} from '../../navigators/AppNavigator'
+import {Button} from '../components/Button'
+import {colors, fonts, sizes} from '../../../shared/theme'
+import {useGlobalState} from '../services/state'
+import {ScreenProps} from '../navigators/AppNavigator'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
 
 export const ReviewScreen = ({navigation, route}: ScreenProps<'Review'>) => {
@@ -65,7 +65,7 @@ const $container: ViewStyle = {
   padding: sizes.spacing.md,
   backgroundColor: colors.primitives.white1000,
   borderColor: colors.tokens.textBase,
-  borderWidth: 2,
+  borderWidth: sizes.border.sm,
   borderTopWidth: 0,
   paddingBottom: sizes.spacing.md,
   borderBottomLeftRadius: sizes.spacing.lg,
@@ -79,7 +79,7 @@ const $heading: TextStyle = {
 
 const $textArea: ViewStyle = {
   borderColor: colors.tokens.textBase,
-  borderWidth: 2,
+  borderWidth: sizes.border.sm,
   padding: sizes.spacing.sm,
   borderRadius: sizes.spacing.md,
   marginBottom: sizes.spacing.lg,

@@ -1,5 +1,5 @@
 import {rest} from 'msw'
-import {PostGamesParams} from '../../app/services/types'
+import {PostGamesParams} from '../../shared/services/types'
 import {gameData, sliceGames, sortGames} from '../utils/prepareGameData'
 
 export const games = rest.post(

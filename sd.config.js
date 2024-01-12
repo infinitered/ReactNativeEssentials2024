@@ -1,7 +1,7 @@
 const StyleDictionary = require('style-dictionary')
 const camelCase = require('camelCase')
 const deepmerge = require('deepmerge')
-const figmaVariables = require('./app/theme/tokens/figmaVariables.json')
+const figmaVariables = require('./shared/theme/tokens/figmaVariables.json')
 
 StyleDictionary.registerTransform({
   type: `name`,
@@ -78,7 +78,7 @@ module.exports = {
   platforms: {
     'color: primitives & tokens': {
       transforms: ['attribute/cti', 'name/ti/camel/strip', 'color/hex8'],
-      buildPath: './app/theme/tokens/',
+      buildPath: './shared/theme/tokens/',
       options: {stripFromPath: ['color']},
       files: [
         {
@@ -95,7 +95,7 @@ module.exports = {
     },
     'size: primitives & tokens': {
       transforms: ['attribute/cti', 'name/ti/camel/strip'],
-      buildPath: './app/theme/tokens/',
+      buildPath: './shared/theme/tokens/',
       options: {stripFromPath: ['size']},
       files: [
         {
@@ -114,7 +114,7 @@ module.exports = {
     },
     'size: semantics': {
       transforms: ['attribute/cti', 'name/ti/camel/strip'],
-      buildPath: './app/theme/tokens/',
+      buildPath: './shared/theme/tokens/',
       options: {stripFromPath: ['size', 'spacing', 'radius', 'border']},
       files: [
         {

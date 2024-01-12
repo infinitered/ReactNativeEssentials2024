@@ -3,12 +3,15 @@ import {
   SafeAreaProvider,
   initialWindowMetrics,
 } from 'react-native-safe-area-context'
-import {GamesListScreen} from './screens/GamesListScreen'
+import {AppNavigator} from './navigators/AppNavigator'
+import {GlobalStateProvider} from './services/state'
 
 const App = (): React.JSX.Element | null => {
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <GamesListScreen />
+      <GlobalStateProvider>
+        <AppNavigator />
+      </GlobalStateProvider>
     </SafeAreaProvider>
   )
 }

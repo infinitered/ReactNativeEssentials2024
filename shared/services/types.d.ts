@@ -1,5 +1,3 @@
-import {AppStackParamList} from '../navigators/AppNavigator'
-
 export interface PostGamesParams {
   sortBy?: Extract<
     keyof Game,
@@ -66,10 +64,4 @@ export interface GlobalStateContextData {
   toggleFavorite: ToggleFavorite
   reviews: Reviews
   appendReview: AppendReview
-}
-
-declare global {
-  namespace ReactNavigation {
-    interface RootParamList extends AppStackParamList {}
-  }
 }
