@@ -1,6 +1,6 @@
-import {PostGamesParams} from '../../shared/services/types'
+import { PostGamesParams } from '../../shared/services/types'
 import rawData from '../mocks/games.json'
-import {camelCaseKeys} from './camelCaseKeys'
+import { camelCaseKeys } from './camelCaseKeys'
 
 const transformedData = rawData.map(g => {
   let game = g as Record<string, any>
@@ -26,7 +26,7 @@ export function sortGames(
   data: typeof gameData,
   opts: Required<PostGamesParams>,
 ) {
-  const {sortBy, sortOrder} = opts
+  const { sortBy, sortOrder } = opts
 
   return data.sort((a, b) => {
     const order = sortOrder === 'asc' ? [a, b] : [b, a]
@@ -47,7 +47,7 @@ export function sliceGames(
   data: typeof gameData,
   opts: Required<PostGamesParams>,
 ) {
-  const {limit, offset} = opts
+  const { limit, offset } = opts
 
   return data.slice(offset, offset + limit)
 }

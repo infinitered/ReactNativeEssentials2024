@@ -1,3 +1,3 @@
-import {Pressable as Button} from 'react-native'
+import { Pressable as Button } from 'react-native'
 
-export {Button}
+export { Button }

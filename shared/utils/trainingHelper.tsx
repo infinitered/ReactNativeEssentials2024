@@ -1,19 +1,19 @@
-import {DevSettings, Platform} from 'react-native'
-import {MMKV} from 'react-native-mmkv'
+import { DevSettings, Platform } from 'react-native'
+import { MMKV } from 'react-native-mmkv'
 
-export const storage = new MMKV({id: '@RNEssentials/training'})
+export const storage = new MMKV({ id: '@RNEssentials/training' })
 
 export type AppModes = (typeof appModes)[number]['value']
 
 const appModes = [
-  {label: 'Assignment', value: 'assignment'},
-  {label: 'Chapter 1 Solution', value: 'chapter1'},
-  {label: 'Chapter 2 Solution', value: 'chapter2'},
-  {label: 'Chapter 3 Solution', value: 'chapter3'},
-  {label: 'Chapter 4 Solution', value: 'chapter4'},
-  {label: 'Chapter 5 Solution', value: 'chapter5'},
-  {label: 'Chapter 6 Solution', value: 'chapter6'},
-  {label: 'Chapter 7 Solution', value: 'chapter7'},
+  { label: 'Assignment', value: 'assignment' },
+  { label: 'Chapter 1 Solution', value: 'chapter1' },
+  { label: 'Chapter 2 Solution', value: 'chapter2' },
+  { label: 'Chapter 3 Solution', value: 'chapter3' },
+  { label: 'Chapter 4 Solution', value: 'chapter4' },
+  { label: 'Chapter 5 Solution', value: 'chapter5' },
+  { label: 'Chapter 6 Solution', value: 'chapter6' },
+  { label: 'Chapter 7 Solution', value: 'chapter7' },
 ] as const
 
 export function setupAppModeSelector() {

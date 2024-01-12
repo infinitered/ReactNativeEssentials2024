@@ -1,3 +1,3 @@
-import {Switch} from 'react-native'
+import { Switch } from 'react-native'
 
-export {Switch}
+export { Switch }

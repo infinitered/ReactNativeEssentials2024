@@ -23,7 +23,7 @@ function addCollectionNameToToken(tokens, collectionName) {
   if (typeof tokens === 'object' && tokens.type) {
     tokens.extensions = {
       ...tokens.extensions,
-      ['ReactNativeEssentials']: {collectionName},
+      ['ReactNativeEssentials']: { collectionName },
     }
   } else {
     Object.keys(tokens).forEach(k => {
@@ -79,7 +79,7 @@ module.exports = {
     'color: primitives & tokens': {
       transforms: ['attribute/cti', 'name/ti/camel/strip', 'color/hex8'],
       buildPath: './shared/theme/tokens/',
-      options: {stripFromPath: ['color']},
+      options: { stripFromPath: ['color'] },
       files: [
         {
           format: 'javascript/es6',
@@ -96,7 +96,7 @@ module.exports = {
     'size: primitives & tokens': {
       transforms: ['attribute/cti', 'name/ti/camel/strip'],
       buildPath: './shared/theme/tokens/',
-      options: {stripFromPath: ['size']},
+      options: { stripFromPath: ['size'] },
       files: [
         {
           format: 'javascript/es6',
@@ -115,7 +115,7 @@ module.exports = {
     'size: semantics': {
       transforms: ['attribute/cti', 'name/ti/camel/strip'],
       buildPath: './shared/theme/tokens/',
-      options: {stripFromPath: ['size', 'spacing', 'radius', 'border']},
+      options: { stripFromPath: ['size', 'spacing', 'radius', 'border'] },
       files: [
         {
           format: 'javascript/es6',

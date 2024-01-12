@@ -1,3 +1,3 @@
-import {Pressable as Card} from 'react-native'
+import { Pressable as Card } from 'react-native'
 
-export {Card}
+export { Card }
