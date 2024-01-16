@@ -13,6 +13,7 @@ import {
   setupTrainingAppModeSelector,
   TrainingBanner,
 } from './shared/utils/trainingHelper'
+import AppChapter6 from './solutions/chapter6/App'
 import AppChapter7 from './solutions/chapter7/App'
 
 const activeAppMode = setupTrainingAppModeSelector()
@@ -32,7 +33,7 @@ const appFileRegistry = {
   chapter3: AppChapter7,
   chapter4: AppChapter7,
   chapter5: AppChapter7,
-  chapter6: AppChapter7,
+  chapter6: AppChapter6,
   chapter7: AppChapter7,
 }
 

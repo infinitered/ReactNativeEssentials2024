@@ -60,8 +60,6 @@ export type AppendReview = (gameId: Game['id'], review: string) => void
 export interface GlobalStateContextData {
   games: Array<Game>
   setGames: SetGames
-  favorites: Favorites
-  toggleFavorite: ToggleFavorite
   reviews: Reviews
   appendReview: AppendReview
 }
