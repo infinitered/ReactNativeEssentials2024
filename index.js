@@ -13,6 +13,7 @@ import {
   setupTrainingAppModeSelector,
   TrainingBanner,
 } from './shared/utils/trainingHelper'
+import AppChapter1 from './solutions/chapter1/App'
 import AppChapter2 from './solutions/chapter2/App'
 import AppChapter3 from './solutions/chapter3/App'
 import AppChapter4 from './solutions/chapter4/App'
@@ -32,7 +33,7 @@ if (__DEV__) {
 
 const appFileRegistry = {
   assignment: AppAssignment,
-  chapter1: AppChapter7,
+  chapter1: AppChapter1,
   chapter2: AppChapter2,
   chapter3: AppChapter3,
   chapter4: AppChapter4,
