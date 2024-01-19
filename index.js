@@ -13,6 +13,12 @@ import {
   setupTrainingAppModeSelector,
   TrainingBanner,
 } from './shared/utils/trainingHelper'
+import AppChapter1 from './solutions/chapter1/App'
+import AppChapter2 from './solutions/chapter2/App'
+import AppChapter3 from './solutions/chapter3/App'
+import AppChapter4 from './solutions/chapter4/App'
+import AppChapter5 from './solutions/chapter5/App'
+import AppChapter6 from './solutions/chapter6/App'
 import AppChapter7 from './solutions/chapter7/App'
 
 const activeAppMode = setupTrainingAppModeSelector()
@@ -27,12 +33,12 @@ if (__DEV__) {
 
 const appFileRegistry = {
   assignment: AppAssignment,
-  chapter1: AppChapter7,
-  chapter2: AppChapter7,
-  chapter3: AppChapter7,
-  chapter4: AppChapter7,
-  chapter5: AppChapter7,
-  chapter6: AppChapter7,
+  chapter1: AppChapter1,
+  chapter2: AppChapter2,
+  chapter3: AppChapter3,
+  chapter4: AppChapter4,
+  chapter5: AppChapter5,
+  chapter6: AppChapter6,
   chapter7: AppChapter7,
 }
 
