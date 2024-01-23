@@ -1,15 +1,29 @@
 # React Native Essentials
 
-!TODO! Add a description of the project here.
+Welcome to the React Native Essentials workshop! This hands-on workshop will go through the fundamentals of React Native from “init-ing” our application to getting our app to looking good to digging into native libraries. It will wrap up with a discussion on more “intermediate” topics and address any questions the class may have. The objective of this workshop is to help React developers take the plunge into mobile and show the similarities between the two platforms.
+
+Table of contents (subject to change):
+
+1. Getting Started
+   1. Setting up the Environment
+   2. Working with dependencies
+   3. Application Architecture
+   4. Looking Under the Hood
+2. Making Stuff Look Good (custom components, styling, and layout)
+3. Navigating the App
+4. Filling in the List (working with lists and api data)
+5. Responding to Touches (pressables and inputs)
+6. Wrap-up & Q&A
 
 ---
 
 <details open>
   <summary><strong>Table of Contents</strong></summary>
 
-- Setup
+- React Native Essentials
   - [Quick Start](#quick-start)
-  </details>
+  - [Troubleshooting](#troubleshooting)
+  - [Learn More](#learn-more)
 
 ---
 
