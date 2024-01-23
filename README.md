@@ -31,25 +31,19 @@ Table of contents (subject to change):
 
 For the full instructions on how to setup your environment for React Native development, head on over to our [React Native Essentials Starter Pack Environment Setup](https://github.com/infinitered/ReactNativeEssentialsStarterPack/blob/main/docs/environment-setup-guide.md) doc (be sure to also set up either your iOS Simulator and/or Android Emulator).
 
-1. Verify environment status:
-
-```bash
-./scripts/setup/verify-environment
-```
-
-2. Run the project setup script:
+1. Run the project setup script:
 
 ```bash
 yarn setup
 ```
 
-3. Start the metro bundler:
+2. Start the metro bundler:
 
 ```bash
 yarn start
 ```
 
-4. Build in dev mode:
+3. Build in dev mode:
 
 - Android: by typing `a` in metro, or in a new shell instance:
 
@@ -63,7 +57,7 @@ yarn start
   yarn ios
   ```
 
-5. Build for your device:
+4. Build for your device:
 
 - [Android link](./docs/simulators-setup.md#yarn-android)
 - [iOS link](./docs/simulators-setup.md#launching-a-specific-simulator)
