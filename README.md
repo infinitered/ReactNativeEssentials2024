@@ -34,7 +34,7 @@ For the full instructions on how to setup your environment for React Native deve
 1. Verify environment status:
 
 ```bash
-./packages/mobile/scripts/setup/verify-environment
+./scripts/setup/verify-environment
 ```
 
 2. Run the project setup script:
