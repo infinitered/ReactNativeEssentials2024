@@ -29,7 +29,7 @@ Table of contents (subject to change):
 
 ## Quick Start
 
-For the full instructions on how to setup your environment for React Native development, head on over to our React Native Essentials Starter Pack [Environment Setup](https://github.com/infinitered/ReactNativeEssentialsStarterPack/blob/main/docs/environment-setup-guide.md) doc (be sure to also set up either your iOS Simulator and/or Android Emulator).
+For the full instructions on how to setup your environment for React Native development, head on over to our [React Native Essentials Starter Pack Environment Setup](https://github.com/infinitered/ReactNativeEssentialsStarterPack/blob/main/docs/environment-setup-guide.md) doc (be sure to also set up either your iOS Simulator and/or Android Emulator).
 
 1. Verify environment status:
 
