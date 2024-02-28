@@ -28,11 +28,11 @@ Style Dictionary is a tool that generates design tokens from a [DTCG spec](https
 
 A `./sd.config.js` file has been configured according to our project needs and the patterns defined in our Figma. All you need to do is run the codegen step:
 
-```bash 
+```bash
 yarn generate:tokens
-``` 
+```
 
-This step will generate a few files in the `./shared/theme/tokens/` directory. You might want to run the `yarn lint` command to prettify these files as they will be generated with no regards for the syntax requirements of the project. 
+This step will generate a few files in the `./shared/theme/tokens/` directory. You might want to run the `yarn lint` command to prettify these files as they will be generated with no regards for the syntax requirements of the project.
 
 ## Using Design Tokens
 
@@ -42,6 +42,6 @@ Depending on the current needs of the project, there might be multiple "tiers" o
 
 - **Semantic Tokens**: This is the first level of abstraction for primitives and puts a general purpose or intent for tokens. For example a primitive color "black" can be described as a semantic color of "text-base". Or, a primitive color of "red" can be described as a semantic color of "text-danger". Example file name: `colorTextSemantics.ts`.
 
-- **Functional Tokens**: Functional tokens are the next tier of tokens that are intended to describe semantic tokens to a more precise degree. These tokens can be implemented to expand the role of designers in building out the components, as the tokens themselves will contain information for all states of a component. For example, when building out a Card component, you may have a tokens called `cardBorderDefault` and `cardBorderPressed` and `cardBorderDisabled` etc. An example file name: `colorCardBorderTokens.ts`. 
+- **Functional Tokens**: Functional tokens are the next tier of tokens that are intended to describe semantic tokens to a more precise degree. These tokens can be implemented to expand the role of designers in building out the components, as the tokens themselves will contain information for all states of a component. For example, when building out a Card component, you may have a tokens called `cardBorderDefault` and `cardBorderPressed` and `cardBorderDisabled` etc. An example file name: `colorCardBorderTokens.ts`.
 
-In this project, we are mostly relying on the more balanced "semantic" tokens as we have a range of developers with varying degrees of comfort for building out UI. 
+In this project, we are mostly relying on the more balanced "semantic" tokens as we have a range of developers with varying degrees of comfort for building out UI.

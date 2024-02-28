@@ -19,7 +19,9 @@ const storage = new MMKV({ id: '@RNEssentials/global/state' })
 
 const initReviews = safeParse(storage.getString('reviews'), {})
 
-export const GlobalStateContext = createContext<GlobalStateContextData>({
+export const GlobalStateContext = createContext<
+  Omit<GlobalStateContextData, 'favorites' | 'toggleFavorite'>
+>({
   games: [],
   setGames: (_games: Array<Game>) => undefined,
   reviews: initReviews,

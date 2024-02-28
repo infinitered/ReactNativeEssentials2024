@@ -10,7 +10,9 @@ import {
   type GlobalStateContextData,
 } from '../../../shared/services/types'
 
-export const GlobalStateContext = createContext<GlobalStateContextData>({
+export const GlobalStateContext = createContext<
+  Pick<GlobalStateContextData, 'games' | 'setGames'>
+>({
   games: [],
   setGames: (_games: Array<Game>) => undefined,
 })
