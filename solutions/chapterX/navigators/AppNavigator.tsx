@@ -8,7 +8,7 @@ import {
   createNativeStackNavigator,
   NativeStackScreenProps,
 } from '@react-navigation/native-stack'
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Platform,
   Pressable,
@@ -18,11 +18,22 @@ import {
 import { MMKV } from 'react-native-mmkv'
 
 import { colors, fonts, sizes } from '../../../shared/theme'
-import { safeParse } from '../../../shared/utils/safeParse'
+import { getObjectKeys, safeParse } from '../../../shared/utils/object'
+import { useAppState } from '../../../shared/utils/useAppState'
 import { Icon } from '../components/Icon'
 import { GameDetailsScreen } from '../screens/GameDetailsScreen'
 import { GamesListScreen } from '../screens/GamesListScreen'
 import { ReviewScreen } from '../screens/ReviewScreen'
+import {
+  cancelScheduledNotifications,
+  NotificationCategory,
+  NotificationChannel,
+  NotificationPressAction,
+  NotificationType,
+  scheduleLocalNotification,
+  useNotificationEvents,
+} from '../services/notifications'
+import { useGlobalState } from '../services/state'
 
 const storage = new MMKV({ id: '@RNEssentials/navigation/state' })
 
@@ -75,6 +86,8 @@ const renderBackButton = (navigation: NavigationHelpers<AppStackParamList>) => {
 }
 
 const AppStack = () => {
+  useNotificationEvents()
+
   return (
     <Stack.Navigator
       initialRouteName="GamesList"
@@ -119,6 +132,54 @@ const AppStack = () => {
 
 export const AppNavigator = (props: NavigationProps) => {
   const colorScheme = useColorScheme()
+  const appState = useAppState()
+
+  const { favorites, reviews, games } = useGlobalState()
+
+  useEffect(() => {
+    if (appState === 'background') {
+      const reviewsIds = getObjectKeys(reviews).map(Number)
+
+      const game = games.find(
+        g => favorites.includes(g.id) && !reviewsIds.includes(g.id),
+      )
+
+      if (!game) return
+
+      scheduleLocalNotification(
+        {
+          title: `Please Review: ${game.name}`,
+          body: 'Looks like you enjoyed this game! Please leave a review!',
+          data: {
+            notificationType: NotificationType.GameReview,
+            gameId: game.id,
+            gameName: game.name,
+          },
+          ios: {
+            categoryId: NotificationCategory.GameReview,
+          },
+          android: {
+            channelId: NotificationChannel.Default,
+            smallIcon: 'ic_notification_default',
+            color: colors.text.accent,
+            pressAction: { id: 'default' },
+            actions: [
+              {
+                title: 'Review Game',
+                input: true, // Android 14 has issues with input quick actions: https://github.com/invertase/notifee/issues/1002
+                pressAction: { id: NotificationPressAction.SubmitReview },
+              },
+            ],
+          },
+        },
+        5000,
+      )
+    }
+
+    return () => {
+      cancelScheduledNotifications()
+    }
+  }, [appState, favorites, reviews, games])
 
   return (
     <NavigationContainer

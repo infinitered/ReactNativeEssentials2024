@@ -19,6 +19,11 @@ import { Rating } from '../components/Rating'
 import { Switch } from '../components/Switch'
 import { Text } from '../components/Text'
 import { type ScreenProps } from '../navigators/AppNavigator'
+import {
+  displayLocalNotification,
+  NotificationChannel,
+  NotificationType,
+} from '../services/notifications'
 import { useGlobalState } from '../services/state'
 
 interface ReviewsProps {
@@ -43,6 +48,28 @@ export const GameDetailsScreen = ({ route }: ScreenProps<'GameDetails'>) => {
     }
   }, [setGame, gameId])
 
+  function notifyForReview(isFavorite: boolean) {
+    if (!game) return
+    if (!isFavorite) return
+    if (reviews.length > 0) return
+
+    displayLocalNotification({
+      title: `Please Review: ${game.name}`,
+      body: 'Looks like you enjoyed this game! Please leave a review!',
+      data: {
+        notificationType: NotificationType.GameReview,
+        gameId: game.id,
+        gameName: game.name,
+      },
+      android: {
+        channelId: NotificationChannel.Default,
+        color: colors.text.accent,
+        smallIcon: 'ic_notification_default',
+        pressAction: { id: 'default' },
+      },
+    })
+  }
+
   useEffect(() => {
     getGame()
   }, [getGame])
@@ -59,6 +86,10 @@ export const GameDetailsScreen = ({ route }: ScreenProps<'GameDetails'>) => {
     totalRatingCount,
     summary,
   } = game ?? {}
+
+  const isFavorite = Boolean(
+    favorites.find(favoriteGameId => favoriteGameId === id),
+  )
 
   return (
     <ScrollView
@@ -81,10 +112,11 @@ export const GameDetailsScreen = ({ route }: ScreenProps<'GameDetails'>) => {
             text="Add to Favorites"
           />
           <Switch
-            on={Boolean(
-              favorites.find(favoriteGameId => favoriteGameId === id),
-            )}
-            onToggle={() => toggleFavorite(id)}
+            on={isFavorite}
+            onToggle={() => {
+              toggleFavorite(id)
+              notifyForReview(!isFavorite)
+            }}
           />
         </View>
       )}

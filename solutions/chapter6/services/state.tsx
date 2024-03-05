@@ -13,7 +13,7 @@ import {
   type GlobalStateContextData,
   type Reviews,
 } from '../../../shared/services/types'
-import { safeParse } from '../../../shared/utils/safeParse'
+import { safeParse } from '../../../shared/utils/object'
 
 const storage = new MMKV({ id: '@RNEssentials/global/state' })
 
