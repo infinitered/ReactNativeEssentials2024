@@ -20,7 +20,6 @@ import AppChapter4 from './solutions/chapter4/App'
 import AppChapter5 from './solutions/chapter5/App'
 import AppChapter6 from './solutions/chapter6/App'
 import AppChapter7 from './solutions/chapter7/App'
-import AppChapterX from './solutions/chapterX/App'
 
 const activeAppMode = setupTrainingAppModeSelector()
 
@@ -41,7 +40,6 @@ const appFileRegistry = {
   chapter5: AppChapter5,
   chapter6: AppChapter6,
   chapter7: AppChapter7,
-  chapterX: AppChapterX,
 }
 
 const AppMode = appFileRegistry[activeAppMode]
